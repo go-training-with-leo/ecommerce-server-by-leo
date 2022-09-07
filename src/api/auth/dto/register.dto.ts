@@ -9,7 +9,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 
 import { Gender } from '@/common/enums';
-import { IsOnlyDate, IsValidGender } from '@/common/decorators';
+import { IsOnlyDate, IsValidGender } from '@/decorators';
 
 export class RegisterDto {
   @IsEmail()

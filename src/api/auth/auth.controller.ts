@@ -2,7 +2,7 @@ import { Body } from '@nestjs/common';
 
 import { RegisterDto } from '@/api/auth/dto';
 import { AuthService } from '@/api/auth/auth.service';
-import { InjectRoute, InjectController, ReqUser } from '@/common/decorators';
+import { InjectRoute, InjectController, ReqUser } from '@/decorators';
 
 import type { User } from '@/api/user/user.entity';
 

@@ -8,8 +8,8 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsOnlyDate, IsValidGender } from '@/common/decorators';
 import { Gender } from '@/common/enums';
+import { IsOnlyDate, IsValidGender } from '@/decorators';
 
 export class CreateUserDto {
   @IsEmail()

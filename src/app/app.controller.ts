@@ -1,4 +1,4 @@
-import { InjectController, InjectRoute } from '@/common/decorators';
+import { InjectController, InjectRoute } from '@/decorators';
 
 import appRoutes from './app.routes';
 

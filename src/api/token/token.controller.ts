@@ -1,4 +1,4 @@
-import { InjectController } from '@/common/decorators';
+import { InjectController } from '@/decorators';
 
 import tokenRoutes from './token.routes';
 

@@ -5,8 +5,8 @@ enum Gender {
 }
 
 enum Role {
-  USER = 1,
-  ADMIN = 0,
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }
 
 export { Role, Gender };

@@ -1,6 +1,6 @@
 import { HttpStatus, RequestMethod } from '@nestjs/common';
 
-import type { IRouteParams } from '@/common/decorators';
+import type { IRouteParams } from '@/decorators';
 
 import { LogInDto } from './dto/login.dto';
 
