@@ -1,51 +1,27 @@
-import {
-  IsEmail,
-  IsString,
-  MinLength,
-  IsNotEmpty,
-  IsPhoneNumber,
-  IsOptional,
-} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsString, IsOptional, IsPhoneNumber } from 'class-validator';
 
 import { Gender, Role } from '@/common/enums';
+import { ActionedBaseDto } from '@/common/dto';
 import { IsOnlyDate, IsValidGender, IsValidRole } from '@/decorators';
 
-export class CreateUserDto {
-  @IsNotEmpty()
+export class UpdatedUserDto extends ActionedBaseDto {
   @IsValidRole()
   @ApiProperty({
     enum: Role,
-    default: 'USER',
   })
-  role?: Role;
+  role: Role;
 
   @IsEmail()
-  @IsNotEmpty()
   @ApiProperty({ format: 'email' })
   email: string;
 
   @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  @ApiProperty({
-    format: 'password',
-    example: 'P@ssw0rd',
-  })
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    example: 'Lorem',
-  })
+  @ApiProperty({ example: 'Lorem' })
   firstName: string;
 
   @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    example: 'Lorem',
-  })
+  @ApiProperty({ example: 'Lorem' })
   lastName: string;
 
   @IsOptional()
@@ -58,17 +34,13 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsOnlyDate()
-  @IsNotEmpty()
   @ApiProperty({
     format: 'date',
     required: false,
   })
   bod?: Date;
 
-  @IsNotEmpty()
   @IsPhoneNumber('VN')
-  @ApiProperty({
-    example: '0123456789',
-  })
+  @ApiProperty({ example: '0123456789' })
   phoneNumber: string;
 }

@@ -14,7 +14,15 @@ export function IsOnlyDate() {
 export function IsValidGender() {
   return applyDecorators(
     Matches(Regex.GENDER, 'i', {
-      message: '$property must match MALE|FEMALE|OTHER.',
+      message: `$property must match ${Regex.GENDER}.`,
+    }),
+  );
+}
+
+export function IsValidRole() {
+  return applyDecorators(
+    Matches(Regex.ROLE, 'i', {
+      message: `$property must match ${Regex.ROLE}.`,
     }),
   );
 }

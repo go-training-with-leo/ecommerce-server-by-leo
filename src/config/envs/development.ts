@@ -18,7 +18,7 @@ export const config = {
   },
   token: {
     authentication: {
-      lifetime: 7 * Time.ONE_DAY,
+      lifetime: 30 * Time.ONE_DAY,
       renewedTimes: 4,
     },
   },

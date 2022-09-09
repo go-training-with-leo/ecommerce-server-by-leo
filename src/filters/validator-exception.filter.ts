@@ -23,6 +23,10 @@ export class ValidatorExceptionFilter implements ExceptionFilter {
     const isDevelopment = isDevelopmentEnv();
 
     const response = host.switchToHttp().getResponse<Response>();
+    console.log(
+      '🚀 ~ file: validator-exception.filter.ts ~ line 26 ~ ValidatorExceptionFilter ~ response',
+      response,
+    );
 
     try {
       const { errors } = exception as unknown as {

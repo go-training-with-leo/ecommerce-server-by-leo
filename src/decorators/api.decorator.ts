@@ -13,7 +13,6 @@ import {
   createParamDecorator,
 } from '@nestjs/common';
 
-import type { ApiBodyOptions } from '@nestjs/swagger';
 import type { CustomDecorator } from '@nestjs/common';
 
 import { LocalAuthGuard } from '@/api/auth/guards';
@@ -23,6 +22,8 @@ import type { Role } from '@/common/enums';
 
 import { SwaggerApi } from './swagger.decorator';
 
+import type { ISwaggerParams } from './swagger.decorator';
+
 export interface IRouteParams {
   path: string;
   code?: number;
@@ -30,7 +31,7 @@ export interface IRouteParams {
   roles?: Role[];
   jwtSecure?: boolean;
   localSecure?: boolean;
-  swaggerInfo?: { body?: ApiBodyOptions };
+  swaggerInfo?: ISwaggerParams;
 }
 
 function Public(): CustomDecorator<string> {
@@ -44,7 +45,7 @@ export function Roles(roles: Role[]): CustomDecorator<string> {
 export function InjectRoute({
   path = '/',
   roles = [],
-  swaggerInfo = {},
+  swaggerInfo = { secure: true },
   jwtSecure = true,
   localSecure = false,
   code = HttpStatus.OK,
@@ -60,7 +61,7 @@ export function InjectRoute({
   const decorators = [
     methodDecorator[method](path),
     HttpCode(code),
-    SwaggerApi({ secure: jwtSecure, swaggerInfo }),
+    SwaggerApi({ secure: jwtSecure, ...swaggerInfo }),
   ];
 
   if (roles.length > 0) {

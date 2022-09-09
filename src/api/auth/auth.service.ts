@@ -12,7 +12,8 @@ import {
   WrongCredentialsException,
 } from './auth.exceptions';
 
-import { RegisterDto } from './dto';
+import type { RegisterDto, LoggedInDto, RegisteredDto } from './dto';
+
 import type { ITokenPayload, IValidateUserParams } from './auth.interface';
 
 @Injectable()
@@ -23,7 +24,7 @@ export class AuthService {
     private tokenService: TokenService,
   ) {}
 
-  public async register(userInfo: RegisterDto): Promise<User> {
+  public async register(userInfo: RegisterDto): Promise<RegisteredDto> {
     const { email, phoneNumber } = userInfo;
 
     const user = await this.userService.findOneByEmailOrPhoneNumber({
@@ -35,28 +36,29 @@ export class AuthService {
       throw new UserAlreadyException();
     }
 
-    return this.userService.create(userInfo);
+    const registeredUser = await this.userService.create(userInfo);
+
+    return registeredUser;
   }
 
-  public async login(
-    userInfo: User,
-  ): Promise<{ accessToken: string; userInfo: User }> {
-    const { id, email } = userInfo;
+  public async login(user: User): Promise<LoggedInDto> {
+    const { email, role } = user;
 
     const payload: ITokenPayload = {
       email,
+      role,
     };
 
     const accessToken = this.jwtService.sign(payload);
 
-    this.tokenService.create({
-      userId: id,
+    await this.tokenService.create({
       accessToken,
+      createdBy: user,
     });
 
     return {
       accessToken,
-      userInfo: userInfo,
+      userInfo: user.toResponse(),
     };
   }
 
