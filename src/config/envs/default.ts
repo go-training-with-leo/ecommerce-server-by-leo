@@ -20,9 +20,9 @@ export const config = {
     secret: process.env.JWT_SECRET,
     refreshSecret: process.env.JWT_REFRESH_SECRET,
   },
-  token: {
-    verification: {
-      lifetime: 2 * Time.ONE_HOUR,
+  code: {
+    resetPassword: {
+      lifetime: 5 * Time.ONE_MINUTE,
     },
   },
   email: {
@@ -30,12 +30,12 @@ export const config = {
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'example@gmail.com',
-        pass: 'example.password',
+        user: process.env.MAIL_USERNAME || 'username',
+        pass: process.env.MAIL_PASSWORD || 'password',
       },
     },
     options: {
-      from: '"Example Name" <example@gmail.com>',
+      from: `"E-Commerce Training" <${process.env.MAIL_USERNAME}>`,
     },
   },
   swagger: {

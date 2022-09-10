@@ -11,16 +11,16 @@ import { TokenModule } from '@/api/token/token.module';
 import { DatabaseModule } from '@/database/database.module';
 
 const EnvSchema = {
+  PORT: Joi.number(),
+  NODE_ENV: Joi.string(),
   DB_TYPE: Joi.string().required(),
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().required(),
   DB_NAME: Joi.string().required(),
   DB_USERNAME: Joi.string().required(),
   DB_PASSWORD: Joi.string().required(),
-  PORT: Joi.number(),
   JWT_SECRET: Joi.string().required(),
   JWT_REFRESH_SECRET: Joi.string().required(),
-  NODE_ENV: Joi.string(),
 };
 
 @Module({
@@ -29,9 +29,9 @@ const EnvSchema = {
       validationSchema: Joi.object().keys(EnvSchema),
       load: [configuration],
     }),
-    TokenModule,
     AuthModule,
     UserModule,
+    TokenModule,
     DatabaseModule,
   ],
   controllers: [AppController],

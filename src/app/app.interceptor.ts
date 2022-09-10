@@ -3,7 +3,7 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
 
 import type { INestApplication } from '@nestjs/common';
 
-import { LoggingInterceptor, ResponseInterceptor } from '@/common/interceptors';
+import { LoggingInterceptor, ResponseInterceptor } from '@/interceptors';
 
 export const loadInterceptors = (app: INestApplication): void => {
   app.useGlobalInterceptors(

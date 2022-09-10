@@ -9,7 +9,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 
 import { Gender } from '@/common/enums';
-import { IsOnlyDate, IsValidGender } from '@/common/decorators';
+import { IsOnlyDate, IsValidGender } from '@/decorators';
 
 export class RegisterDto {
   @IsEmail()
@@ -22,17 +22,17 @@ export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
-  @ApiProperty({ format: 'password' })
+  @ApiProperty({ format: 'password', example: 'P@ssw0rd' })
   password: string;
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ example: 'Lorem' })
   firstName: string;
 
   @IsString()
-  @ApiProperty()
   @IsNotEmpty()
+  @ApiProperty({ example: 'Lorem' })
   lastName: string;
 
   @IsOptional()
@@ -53,6 +53,6 @@ export class RegisterDto {
 
   @IsPhoneNumber('VN')
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ example: '0123456789' })
   phoneNumber: string;
 }
