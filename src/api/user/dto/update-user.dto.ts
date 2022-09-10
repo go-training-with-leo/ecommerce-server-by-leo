@@ -19,19 +19,19 @@ export class UpdateUserDto {
     format: 'password',
     required: false,
   })
-  password: string;
+  password?: string;
 
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  @ApiProperty({ required: false, example: 'Lorem' })
-  firstName: string;
+  @ApiProperty({ required: false })
+  firstName?: string;
 
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  @ApiProperty({ required: false, example: 'Lorem' })
-  lastName: string;
+  @ApiProperty({ required: false })
+  lastName?: string;
 
   @IsOptional()
   @IsValidGender()
@@ -53,6 +53,6 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsOptional()
   @IsPhoneNumber('VN')
-  @ApiProperty({ required: false, example: '0123456789' })
-  phoneNumber: string;
+  @ApiProperty({ required: false })
+  phoneNumber?: string;
 }

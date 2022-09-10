@@ -5,8 +5,9 @@ import type { DeleteResult } from 'typeorm';
 
 import { UserAlreadyException } from '@/api/auth/auth.exceptions';
 
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { UserRepository } from './user.repository';
+
 import type {
   GotUserDto,
   CreateUserDto,
@@ -33,11 +34,11 @@ export class UserService {
       throw new UserAlreadyException();
     }
 
-    const newUser = await this.userRepository.create(userInfo);
+    const createdUser = await this.userRepository.create(userInfo);
 
-    await this.userRepository.save(newUser);
+    await this.userRepository.save(createdUser);
 
-    return newUser.toResponse();
+    return createdUser.toResponse();
   }
 
   public async findOneByEmail(email: string): Promise<User> {
@@ -93,6 +94,23 @@ export class UserService {
     const updatedUser = await this.userRepository.create({
       ...user,
       ...updateInfo,
+    });
+
+    await this.userRepository.save(updatedUser);
+
+    return updatedUser.toResponse();
+  }
+
+  public async resetPassword({
+    user,
+    newPassword,
+  }: {
+    user: User;
+    newPassword: string;
+  }): Promise<void> {
+    const updatedUser = await this.userRepository.create({
+      ...user,
+      password: newPassword,
     });
 
     await this.userRepository.save(updatedUser);

@@ -4,14 +4,14 @@ import { Exclude } from 'class-transformer';
 import { Column, Entity, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 
 import { Gender, Role } from '@/common/enums';
-import { getKeyByValueInObject, hash } from '@/utils/helpers';
+import { entity, getKeyByValueInObject, hash } from '@/utils/helpers';
 
-import { Token } from '@/api/token/token.entity';
+import { Token } from '@/api/token/entities';
 import { Base as BaseEntity } from '@/common/entities';
 
 @Entity()
 export class User extends BaseEntity {
-  @Column({ enum: Role })
+  @Column({ type: 'enum', enum: Role, default: Role.USER })
   role?: Role;
 
   @Column({ unique: true })
@@ -40,34 +40,20 @@ export class User extends BaseEntity {
   @Column({ name: 'phone_number', unique: true })
   phoneNumber: string;
 
-  private isValidFieldBeforeBeforeParse({
-    data,
-    value,
-  }: {
-    data: Record<string, string | number>;
-    value: string | number;
-  }): boolean {
-    return Object.keys(data)
-      .filter((elm) => isNaN(Number(elm)))
-      .includes(value?.toString());
-  }
-
-  private parseDataBeforeAction() {
+  private parseDataBeforeAction(): void {
     const plainRole = this.role ?? 'USER';
 
-    if (this.isValidFieldBeforeBeforeParse({ data: Role, value: plainRole })) {
+    if (entity.isValidFieldBeforeParse({ data: Role, value: plainRole })) {
       this.role = Number(Role?.[plainRole]);
     }
 
-    if (
-      this.isValidFieldBeforeBeforeParse({ data: Gender, value: this.gender })
-    ) {
+    if (entity.isValidFieldBeforeParse({ data: Gender, value: this.gender })) {
       this.gender = Number(Gender?.[this.gender]);
     }
   }
 
   @BeforeInsert()
-  private async formatInsertedData() {
+  private async formatInsertedData(): Promise<void> {
     const saltRounds = 10;
 
     this.password = await hash.generateWithBcrypt({
@@ -79,7 +65,7 @@ export class User extends BaseEntity {
   }
 
   @BeforeUpdate()
-  private async formatUpdatedData() {
+  private async formatUpdatedData(): Promise<void> {
     this.parseDataBeforeAction();
   }
 
@@ -102,5 +88,9 @@ export class User extends BaseEntity {
           value: this.gender,
         }) || null,
     };
+  }
+
+  public fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
   }
 }

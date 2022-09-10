@@ -5,7 +5,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { UserService } from '@/api/user/user.service';
 
-import type { User } from '@/api/user/user.entity';
+import type { User } from '@/api/user/entities';
 import type { ITokenPayload } from '@/api/auth/auth.interface';
 
 @Injectable()

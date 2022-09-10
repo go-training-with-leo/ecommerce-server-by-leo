@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
-import { User } from '@/api/user/user.entity';
+import { User } from '@/api/user/entities';
 import { Base as BaseEntity } from '@/common/entities';
 
 @Entity({ name: 'tokens' })

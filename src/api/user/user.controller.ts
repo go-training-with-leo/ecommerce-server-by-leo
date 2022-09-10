@@ -4,7 +4,7 @@ import { InjectController, InjectRoute, ReqUser } from '@/decorators';
 import userRoutes from './user.routes';
 import { UserService } from './user.service';
 
-import type { User } from './user.entity';
+import type { User } from './entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from './dto';
 
 import type {

@@ -1,6 +1,7 @@
 import { Env } from '@/utils/constants';
 
 import hash from './hash';
+import entity from './entity';
 
 const getEnv = (): string => process.env.NODE_ENV || Env.DEVELOPMENT;
 
@@ -17,4 +18,4 @@ const getKeyByValueInObject = ({
     .filter((elm) => isNaN(Number(elm[0])))
     .find((elm) => elm[1]?.toString() === value?.toString())?.[0];
 
-export { getEnv, isDevelopmentEnv, getKeyByValueInObject, hash };
+export { getEnv, isDevelopmentEnv, getKeyByValueInObject, hash, entity };

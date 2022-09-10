@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
 
-import { Token } from './token.entity';
+import { Token } from './entities';
 
 export class TokenRepository extends Repository<Token> {}

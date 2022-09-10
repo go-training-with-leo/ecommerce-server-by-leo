@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Token } from './token.entity';
+import { Token } from './entities';
 import { TokenRepository } from './token.repository';
 
 import type { CreateTokenDto } from './dto/create-token.dto';
@@ -14,10 +14,10 @@ export class TokenService {
   ) {}
 
   public async create(tokenInfo: CreateTokenDto): Promise<Token> {
-    const newToken = this.tokenRepository.create(tokenInfo);
+    const createdToken = this.tokenRepository.create(tokenInfo);
 
-    await this.tokenRepository.save(newToken);
+    await this.tokenRepository.save(createdToken);
 
-    return newToken;
+    return createdToken;
   }
 }

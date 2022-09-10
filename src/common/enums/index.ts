@@ -9,4 +9,14 @@ enum Role {
   USER = 1,
 }
 
-export { Role, Gender };
+enum Action {
+  RESET_PASSWORD = 0,
+}
+
+enum CodeStatus {
+  IS_CREATED = 0,
+  IS_VERIFIED = 1,
+  IS_USED = 2,
+}
+
+export { Role, Gender, Action, CodeStatus };
