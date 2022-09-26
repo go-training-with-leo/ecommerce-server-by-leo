@@ -5,11 +5,11 @@ enum Gender {
 }
 
 enum Role {
-  ADMIN = 0,
-  USER = 1,
+  USER = 0,
+  ADMIN = 1,
 }
 
-enum Action {
+enum CodeAction {
   RESET_PASSWORD = 0,
 }
 
@@ -19,4 +19,4 @@ enum CodeStatus {
   IS_USED = 2,
 }
 
-export { Role, Gender, Action, CodeStatus };
+export { Role, Gender, CodeAction, CodeStatus };

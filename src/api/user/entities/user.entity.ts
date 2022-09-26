@@ -4,12 +4,12 @@ import { Exclude } from 'class-transformer';
 import { Column, Entity, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 
 import { Gender, Role } from '@/common/enums';
-import { entity, getKeyByValueInObject, hash } from '@/utils/helpers';
+import { entity, hash } from '@/utils/helpers';
 
 import { Token } from '@/api/token/entities';
 import { Base as BaseEntity } from '@/common/entities';
 
-@Entity()
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role?: Role;
@@ -53,7 +53,7 @@ export class User extends BaseEntity {
   }
 
   @BeforeInsert()
-  private async formatInsertedData(): Promise<void> {
+  private async setInsertingData(): Promise<void> {
     const saltRounds = 10;
 
     this.password = await hash.generateWithBcrypt({
@@ -65,7 +65,7 @@ export class User extends BaseEntity {
   }
 
   @BeforeUpdate()
-  private async formatUpdatedData(): Promise<void> {
+  private async setUpdatingData(): Promise<void> {
     this.parseDataBeforeAction();
   }
 
@@ -75,18 +75,17 @@ export class User extends BaseEntity {
   })
   sessions: Token[];
 
-  public toResponse(): Omit<this, 'password' | 'formatData'> & {
+  public toResponse(): Omit<
+    this,
+    'password' | 'setInsertingData' | 'setUpdatingData'
+  > & {
     role: string;
     gender: string;
   } {
     return {
-      ...omit(['password', 'formatData'], this),
-      role: getKeyByValueInObject({ data: Role, value: this.role }),
-      gender:
-        getKeyByValueInObject({
-          data: Gender,
-          value: this.gender,
-        }) || null,
+      ...omit(['password', 'setInsertingData', 'setUpdatingData'], this),
+      role: Role[this.role],
+      gender: Gender[this.gender] || null,
     };
   }
 

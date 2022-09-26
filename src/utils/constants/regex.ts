@@ -1,12 +1,9 @@
+import { enumh } from '@/utils/helpers';
 import { Gender, Role } from '@/common/enums';
 
-const GENDER = `${Object.values(Gender)
-  .filter((gender) => isNaN(Number(gender)))
-  .join('|')}`;
+const GENDER = enumh?.convertToRegex<typeof Gender>(Gender);
 
-const ROLE = `${Object.values(Role)
-  .filter((role) => isNaN(Number(role)))
-  .join('|')}`;
+const ROLE = enumh?.convertToRegex<typeof Role>(Role);
 
 const BOD = /^\d{4}(-)(((0)[0-9])|((1)[0-2]))(-)([0-2][0-9]|(3)[0-1])$/i;
 

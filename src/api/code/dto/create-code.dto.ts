@@ -1,6 +1,7 @@
-import { IsEmail, IsNotEmpty, IsUUID } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Action } from '@/common/enums';
+import { IsEmail, IsNotEmpty, IsUUID } from 'class-validator';
+
+import { CodeAction } from '@/common/enums';
 
 export class CreateCodeDto {
   @IsEmail()
@@ -16,8 +17,11 @@ export class CreateCodeDto {
   code: string;
 
   @IsNotEmpty()
-  @ApiProperty({ enum: Action, default: 'RESET_PASSWORD' })
-  action: Action;
+  @ApiProperty({
+    enum: CodeAction,
+    default: CodeAction[CodeAction.RESET_PASSWORD],
+  })
+  action: CodeAction;
 
   @IsNotEmpty()
   @ApiProperty()

@@ -2,7 +2,7 @@ import { UpdateResult } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Action, CodeStatus } from '@/common/enums';
+import { CodeAction, CodeStatus } from '@/common/enums';
 
 import { Code } from './entities';
 import { CodeRepository } from './code.repository';
@@ -13,7 +13,7 @@ import type { CreateCodeDto } from './dto';
 export interface ICodeInfoParams {
   code: string;
   email: string;
-  action: Action;
+  action: CodeAction;
 }
 
 @Injectable()

@@ -2,7 +2,7 @@ import { Exclude } from 'class-transformer';
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
 
 import { entity } from '@/utils/helpers';
-import { Action, CodeStatus } from '@/common/enums';
+import { CodeAction, CodeStatus } from '@/common/enums';
 import { Base as BaseEntity } from '@/common/entities';
 
 @Entity({ name: 'codes' })
@@ -14,8 +14,12 @@ export class Code extends BaseEntity {
   @Column()
   email: string;
 
-  @Column({ type: 'enum', enum: Action, default: Action.RESET_PASSWORD })
-  action: Action;
+  @Column({
+    type: 'enum',
+    enum: CodeAction,
+    default: CodeAction.RESET_PASSWORD,
+  })
+  action: CodeAction;
 
   @Column({ name: 'expires_in' })
   expiresIn: number;
@@ -24,16 +28,16 @@ export class Code extends BaseEntity {
   status: CodeStatus;
 
   private parseDataBeforeAction(): void {
-    const plainStatus = this.status ?? 'IS_CREATED';
-    const plainAction = this.action ?? 'RESET_PASSWORD';
+    const plainStatus = this.status ?? CodeStatus[CodeStatus.IS_CREATED];
+    const plainAction = this.action ?? CodeAction[CodeAction.RESET_PASSWORD];
 
     if (
       entity.isValidFieldBeforeParse({
-        data: Action,
+        data: CodeAction,
         value: plainAction,
       })
     ) {
-      this.action = Number(Action?.[plainAction]);
+      this.action = Number(CodeAction[plainAction]);
     }
 
     if (

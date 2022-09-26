@@ -1,4 +1,4 @@
-import { Action } from '@/common/enums';
+import { CodeAction } from '@/common/enums';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsUUID } from 'class-validator';
 

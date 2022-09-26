@@ -16,7 +16,7 @@ export class CreateUserDto {
   @IsValidRole()
   @ApiProperty({
     enum: Role,
-    default: 'USER',
+    default: Role[Role.USER],
   })
   role?: Role;
 

@@ -13,7 +13,8 @@ export default {
   create: <IRouteParams>{
     path: '/',
     method: RequestMethod.POST,
-    roles: [Role.ADMIN],
+    jwtSecure: false,
+    // roles: [Role.ADMIN],
     swaggerInfo: {
       responses: [{ status: HttpStatus.OK, type: CreatedUserDto }],
     },

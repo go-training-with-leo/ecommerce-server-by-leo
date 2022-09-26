@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import { hash } from '@/utils/helpers';
 import { MailService } from '@/mail/mail.service';
-import { Action, CodeStatus } from '@/common/enums';
+import { CodeAction, CodeStatus } from '@/common/enums';
 import { UserService } from '@/api/user/user.service';
 import { CodeService } from '@/api/code/code.service';
 import { TokenService } from '@/api/token/token.service';
@@ -120,7 +120,7 @@ export class AuthService {
     const codeInfo: ICodeInfoParams = {
       code,
       email,
-      action: Action.RESET_PASSWORD,
+      action: CodeAction.RESET_PASSWORD,
     };
 
     const passwordResetCode = await this.codeService.getByCode(codeInfo);

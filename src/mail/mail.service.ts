@@ -6,7 +6,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { CodeService } from '@/api/code/code.service';
 
 import type { User } from '@/api/user/entities';
-import { Action } from '@/common/enums';
+import { CodeAction } from '@/common/enums';
 
 @Injectable()
 export class MailService {
@@ -23,7 +23,7 @@ export class MailService {
     const codeInfo = {
       code,
       email,
-      action: Action.RESET_PASSWORD,
+      action: CodeAction.RESET_PASSWORD,
       expiresIn: this.configService.get('code.resetPassword.lifetime'),
     };
 
