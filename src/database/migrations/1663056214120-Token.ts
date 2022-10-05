@@ -25,10 +25,6 @@ export class Token1663056214120 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'refresh_token',
-            type: 'varchar',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: `('now'::text)::timestamp(6) with time zone`,

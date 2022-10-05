@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
+import { enumh } from '@/utils/helpers';
 import { Gender, Role } from '@/common/enums';
 import { IsOnlyDate, IsValidGender, IsValidRole } from '@/decorators';
 
@@ -16,7 +17,7 @@ export class CreateUserDto {
   @IsValidRole()
   @ApiProperty({
     enum: Role,
-    default: Role[Role.USER],
+    default: Role[enumh.getFirstValue<typeof Role>(Role)],
   })
   role?: Role;
 

@@ -4,12 +4,16 @@ import { Column, Entity, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 
 import { Token } from '@/api/token/entities';
 import { Gender, Role } from '@/common/enums';
-import { entity, hash } from '@/utils/helpers';
+import { entity, enumh, hash } from '@/utils/helpers';
 import { Base as BaseEntity } from '@/common/entities';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
-  @Column({ type: 'enum', enum: Role, default: Role.USER })
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: enumh.getFirstValue<typeof Role>(Role),
+  })
   role?: Role;
 
   @Column({ unique: true })

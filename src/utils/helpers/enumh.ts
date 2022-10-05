@@ -10,7 +10,12 @@ function getValuesAndToString<E>(data: E): string[] {
     .map((elm) => elm.toString());
 }
 
+function getFirstValue<E>(data: E): string {
+  return Object.values(data).filter((elm) => !isNaN(Number(elm)))?.[0];
+}
+
 export default {
+  getFirstValue,
   convertToRegex,
   getValuesAndToString,
 };

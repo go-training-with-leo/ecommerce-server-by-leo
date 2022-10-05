@@ -5,7 +5,7 @@ enum Gender {
 }
 
 enum Role {
-  USER = 0,
+  CUSTOMER = 0,
   ADMIN = 1,
 }
 
