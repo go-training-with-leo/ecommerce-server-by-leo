@@ -16,8 +16,8 @@ import type { ICodeInfoParams } from '@/api/code/code.service';
 import {
   UserAlreadyException,
   WrongCredentialsException,
-  InvalidPasswordResetCodeException,
   NotMatchPasswordResetException,
+  InvalidPasswordResetCodeException,
 } from './auth.exceptions';
 
 import type {
@@ -27,7 +27,6 @@ import type {
   ResetPassword,
   VerifyPasswordResetCode,
 } from './dto';
-
 import type { ITokenPayload, IValidateUserParams } from './auth.interface';
 
 @Injectable()

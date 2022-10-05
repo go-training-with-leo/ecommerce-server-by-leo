@@ -1,4 +1,3 @@
-import { applyDecorators } from '@nestjs/common';
 import {
   ApiBody,
   ApiTags,
@@ -7,6 +6,7 @@ import {
   ApiBearerAuth,
   ApiResponseOptions,
 } from '@nestjs/swagger';
+import { applyDecorators } from '@nestjs/common';
 
 import type { ApiBodyOptions } from '@nestjs/swagger';
 

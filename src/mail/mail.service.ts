@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 
+import { CodeAction } from '@/common/enums';
 import { CodeService } from '@/api/code/code.service';
 
 import type { User } from '@/api/user/entities';
-import { CodeAction } from '@/common/enums';
 
 @Injectable()
 export class MailService {

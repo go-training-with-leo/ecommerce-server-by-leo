@@ -1,6 +1,7 @@
 import { Role } from '@/common/enums';
 import { IRouteParams } from '@/decorators';
 import { HttpStatus, RequestMethod } from '@nestjs/common';
+
 import {
   GotUserDto,
   CreatedUserDto,

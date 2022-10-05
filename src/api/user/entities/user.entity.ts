@@ -1,12 +1,10 @@
 import { omit } from 'ramda';
 import { Exclude } from 'class-transformer';
-
 import { Column, Entity, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 
+import { Token } from '@/api/token/entities';
 import { Gender, Role } from '@/common/enums';
 import { entity, hash } from '@/utils/helpers';
-
-import { Token } from '@/api/token/entities';
 import { Base as BaseEntity } from '@/common/entities';
 
 @Entity({ name: 'users' })

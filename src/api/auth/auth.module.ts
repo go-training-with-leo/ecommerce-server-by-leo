@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { MailModule } from '@/mail/mail.module';
 import { CodeModule } from '@/api/code/code.module';
 import { UserModule } from '@/api/user/user.module';
 import { TokenModule } from '@/api/token/token.module';
@@ -10,7 +11,6 @@ import { TokenModule } from '@/api/token/token.module';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy, LocalStrategy } from './strategies';
-import { MailModule } from '@/mail/mail.module';
 
 @Module({
   imports: [

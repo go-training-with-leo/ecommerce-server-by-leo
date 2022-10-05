@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import type { DeleteResult } from 'typeorm';
+import type { DeleteResult, Repository } from 'typeorm';
 
 import { UserAlreadyException } from '@/api/auth/auth.exceptions';
 
 import { User } from './entities/user.entity';
-import { UserRepository } from './user.repository';
 
 import type {
   GotUserDto,
@@ -20,7 +19,7 @@ import type {
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: UserRepository,
+    private userRepository: Repository<User>,
   ) {}
 
   public async create(userInfo: CreateUserDto): Promise<CreatedUserDto> {

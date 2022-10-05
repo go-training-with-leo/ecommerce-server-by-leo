@@ -1,11 +1,10 @@
-import { UpdateResult } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { CodeAction, CodeStatus } from '@/common/enums';
 
 import { Code } from './entities';
-import { CodeRepository } from './code.repository';
 import { WrongCodeInformationException } from './code.exceptions';
 
 import type { CreateCodeDto } from './dto';
@@ -20,7 +19,7 @@ export interface ICodeInfoParams {
 export class CodeService {
   constructor(
     @InjectRepository(Code)
-    private codeRepository: CodeRepository,
+    private codeRepository: Repository<Code>,
   ) {}
 
   public async create(codeInfo: CreateCodeDto): Promise<Code> {

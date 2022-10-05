@@ -4,9 +4,9 @@ import { AuthService } from '@/api/auth/auth.service';
 import {
   RegisterDto,
   RegisteredDto,
+  ResetPassword,
   ForgetPasswordDto,
   VerifyPasswordResetCode,
-  ResetPassword,
 } from '@/api/auth/dto';
 import { InjectRoute, InjectController, ReqUser } from '@/decorators';
 
