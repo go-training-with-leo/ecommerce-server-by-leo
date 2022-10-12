@@ -1,14 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty } from 'class-validator';
 
-export class CreateTokenDto {
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  userId: string;
+import type { User } from '@/api/user/entities';
 
-  @ApiProperty()
+export class CreateTokenDto {
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   accessToken: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  createdBy: User;
 }

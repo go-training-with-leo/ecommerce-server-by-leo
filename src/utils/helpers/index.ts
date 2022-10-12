@@ -1,9 +1,11 @@
 import { Env } from '@/utils/constants';
 
 import hash from './hash';
+import enumh from './enumh';
+import entity from './entity';
 
-const getEnv = () => process.env.NODE_ENV || Env.DEVELOPMENT;
+const getEnv = (): string => process.env.NODE_ENV || Env.DEVELOPMENT;
 
-const isDevelopmentEnv = () => getEnv() !== Env.PRODUCTION;
+const isDevelopmentEnv = (): boolean => getEnv() !== Env.PRODUCTION;
 
-export { getEnv, isDevelopmentEnv, hash };
+export { getEnv, isDevelopmentEnv, hash, enumh, entity };

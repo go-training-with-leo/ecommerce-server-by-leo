@@ -38,3 +38,5 @@ lerna-debug.log*
 # environments
 docker.env
 .env
+.env.local
+.env.staging

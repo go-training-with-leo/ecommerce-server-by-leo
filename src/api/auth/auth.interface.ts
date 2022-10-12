@@ -1,3 +1,5 @@
+import type { Role } from '@/common/enums';
+
 export interface IValidateUserParams {
   email: string;
   password: string;
@@ -5,4 +7,5 @@ export interface IValidateUserParams {
 
 export interface ITokenPayload {
   email: string;
+  role: Role;
 }

@@ -11,3 +11,15 @@ export class WrongCredentialsException extends BadRequestException {
     super('Wrong credentials provided.');
   }
 }
+
+export class InvalidPasswordResetCodeException extends BadRequestException {
+  constructor() {
+    super('Invalid password reset code.');
+  }
+}
+
+export class NotMatchPasswordResetException extends BadRequestException {
+  constructor() {
+    super('New Password and Confirm Password do not match together.');
+  }
+}

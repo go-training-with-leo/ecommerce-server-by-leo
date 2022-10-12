@@ -1,12 +1,22 @@
 enum Gender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-  OTHER = 'OTHER',
+  MALE = 0,
+  FEMALE = 1,
+  OTHER = 2,
 }
 
 enum Role {
-  USER = 1,
-  ADMIN = 0,
+  CUSTOMER = 0,
+  ADMIN = 1,
 }
 
-export { Role, Gender };
+enum CodeAction {
+  RESET_PASSWORD = 0,
+}
+
+enum CodeStatus {
+  IS_CREATED = 0,
+  IS_VERIFIED = 1,
+  IS_USED = 2,
+}
+
+export { Role, Gender, CodeAction, CodeStatus };

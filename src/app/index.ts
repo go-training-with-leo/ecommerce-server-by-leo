@@ -5,8 +5,8 @@ import type { INestApplication } from '@nestjs/common';
 
 import { isDevelopmentEnv } from '@/utils/helpers';
 
-import { loadGuards } from './app.guard';
 import { AppModule } from './app.module';
+import { loadGuards } from './app.guard';
 import { genAPIDocument } from './app.document';
 import { loadMiddlewares } from './app.middleware';
 import { loadErrorHandling } from './app.exception';

@@ -6,23 +6,26 @@ export const config = {
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 5432,
 
+    database: process.env.DB_NAME || 'dbname',
     username: process.env.DB_USERNAME || 'username',
     password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_NAME || 'dbname',
 
     entities: [`${__dirname}/../../api/**/*.entity.{js,ts}`],
 
+    ssl: {
+      rejectUnauthorized: false,
+    },
     logging: false,
-    synchronize: false,
+    synchronize: true,
     autoLoadEntities: true,
   },
   jwt: {
     secret: process.env.JWT_SECRET,
     refreshSecret: process.env.JWT_REFRESH_SECRET,
   },
-  token: {
-    verification: {
-      lifetime: 2 * Time.ONE_HOUR,
+  code: {
+    resetPassword: {
+      lifetime: 5 * Time.ONE_MINUTE,
     },
   },
   email: {
@@ -30,12 +33,12 @@ export const config = {
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'example@gmail.com',
-        pass: 'example.password',
+        user: process.env.MAIL_USERNAME || 'username',
+        pass: process.env.MAIL_PASSWORD || 'password',
       },
     },
     options: {
-      from: '"Example Name" <example@gmail.com>',
+      from: `"E-Commerce Training" <${process.env.MAIL_USERNAME}>`,
     },
   },
   swagger: {

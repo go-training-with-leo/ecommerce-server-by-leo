@@ -13,12 +13,12 @@ export const config = {
     // entities: [`${__dirname}/../../api/**/*.entity.{js,ts}`],
 
     logging: true,
-    synchronize: true,
+    synchronize: false,
     // autoLoadEntities: true,
   },
   token: {
     authentication: {
-      lifetime: 7 * Time.ONE_DAY,
+      lifetime: 30 * Time.ONE_DAY,
       renewedTimes: 4,
     },
   },
