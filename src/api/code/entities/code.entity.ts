@@ -2,10 +2,11 @@ import { Exclude } from 'class-transformer';
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
 
 import { entity } from '@/utils/helpers';
+import codeRoutes from '@/api/code/code.routes';
 import { CodeAction, CodeStatus } from '@/common/enums';
 import { Base as BaseEntity } from '@/common/entities';
 
-@Entity({ name: 'codes' })
+@Entity({ name: codeRoutes.index })
 export class Code extends BaseEntity {
   @Exclude()
   @Column({ unique: true })

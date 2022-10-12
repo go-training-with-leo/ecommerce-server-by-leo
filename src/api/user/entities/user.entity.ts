@@ -4,10 +4,11 @@ import { Column, Entity, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 
 import { Token } from '@/api/token/entities';
 import { Gender, Role } from '@/common/enums';
+import userRoutes from '@/api/user/user.routes';
 import { entity, enumh, hash } from '@/utils/helpers';
 import { Base as BaseEntity } from '@/common/entities';
 
-@Entity({ name: 'users' })
+@Entity({ name: userRoutes.index })
 export class User extends BaseEntity {
   @Column({
     type: 'enum',

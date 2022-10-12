@@ -65,7 +65,7 @@ export class UserController {
   public async updateById(
     @Param('id') uid: string,
     @Body() updateInfo: UpdateUserDto,
-  ): Promise<GotUserDto> {
+  ): Promise<UpdatedUserDto> {
     const updatedUser = await this.userService.updateById({
       id: uid,
       updateInfo,
