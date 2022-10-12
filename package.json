@@ -26,7 +26,7 @@
     "migrate:create": "ts-node ./node_modules/typeorm/cli.js migration:create",
     "migrate:up": "yarn run typeorm migration:run",
     "migrate:down": "yarn run typeorm migration:revert",
-    "heroku-postbuild": "yarn add --only=dev --no-shrinkwrap && yarn run build"
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.8.1",
