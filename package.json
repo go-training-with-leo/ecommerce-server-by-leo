@@ -15,7 +15,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -26,7 +26,7 @@
     "migrate:create": "ts-node ./node_modules/typeorm/cli.js migration:create",
     "migrate:up": "yarn run typeorm migration:run",
     "migrate:down": "yarn run typeorm migration:revert",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "postinstall": "yarn run prestart:prod"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.8.1",
