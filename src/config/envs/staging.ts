@@ -12,8 +12,11 @@ export const config = {
 
     // entities: [`${__dirname}/../../api/**/*.entity.{js,ts}`],
 
-    logging: false,
-    // synchronize: false,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+    logging: true,
+    synchronize: true,
     // autoLoadEntities: true,
   },
   token: {
