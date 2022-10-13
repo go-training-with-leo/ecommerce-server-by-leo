@@ -11,7 +11,9 @@ export const config = {
     // database: process.env.DB_NAME || 'dbname',
 
     // entities: [`${__dirname}/../../api/**/*.entity.{js,ts}`],
-
+    ssl: {
+      rejectUnauthorized: false,
+    },
     logging: true,
     // synchronize: false,
     // autoLoadEntities: true,
