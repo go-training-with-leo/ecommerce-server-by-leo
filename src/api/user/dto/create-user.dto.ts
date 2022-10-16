@@ -3,10 +3,10 @@ import {
   IsString,
   MinLength,
   IsNotEmpty,
-  IsPhoneNumber,
   IsOptional,
+  IsPhoneNumber,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 import { enumh } from '@/utils/helpers';
 import { Gender, Role } from '@/common/enums';
@@ -17,7 +17,7 @@ export class CreateUserDto {
   @IsValidRole()
   @ApiProperty({
     enum: Role,
-    default: Role[enumh.getFirstValue<typeof Role>(Role)],
+    default: Role[enumh?.getFirstValue<typeof Role>(Role)],
   })
   role?: Role;
 
@@ -51,18 +51,15 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsValidGender()
-  @ApiProperty({
+  @ApiPropertyOptional({
     enum: Gender,
-    required: false,
   })
   gender?: Gender;
 
   @IsOptional()
   @IsOnlyDate()
-  @IsNotEmpty()
-  @ApiProperty({
+  @ApiPropertyOptional({
     format: 'date',
-    required: false,
   })
   bod?: Date;
 

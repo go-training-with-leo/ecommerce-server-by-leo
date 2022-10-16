@@ -3,43 +3,30 @@ import { HttpStatus, RequestMethod } from '@nestjs/common';
 import { Role } from '@/common/enums';
 import { IRouteParams } from '@/decorators';
 
-import {
-  GotUserDto,
-  CreatedUserDto,
-  UpdatedUserDto,
-  GotUserDetailDto,
-} from './dto';
+import { CreatedAddressDto, GotAddressDetailDto, GotAddressDto } from './dto';
+import { UpdatedAddressDto } from './dto/updated-address.dto.';
 
 export default {
-  index: 'users',
+  index: 'addresses',
   create: <IRouteParams>{
     path: '/',
     method: RequestMethod.POST,
-    roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: CreatedUserDto }],
+      responses: [
+        {
+          status: HttpStatus.OK,
+          type: CreatedAddressDto,
+        },
+      ],
     },
   },
   getAll: <IRouteParams>{
     path: '/',
     method: RequestMethod.GET,
-    roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: GotUserDto, isArray: true }],
-    },
-  },
-  getMe: <IRouteParams>{
-    path: '/me',
-    method: RequestMethod.GET,
-    swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: GotUserDetailDto }],
-    },
-  },
-  updateMe: <IRouteParams>{
-    path: '/me',
-    method: RequestMethod.PUT,
-    swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: UpdatedUserDto }],
+      responses: [
+        { status: HttpStatus.OK, type: GotAddressDto, isArray: true },
+      ],
     },
   },
   getById: <IRouteParams>{
@@ -47,21 +34,19 @@ export default {
     method: RequestMethod.GET,
     roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: GotUserDetailDto }],
+      responses: [{ status: HttpStatus.OK, type: GotAddressDetailDto }],
     },
   },
   updateById: <IRouteParams>{
     path: '/:id',
     method: RequestMethod.PUT,
-    roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: UpdatedUserDto }],
+      responses: [{ status: HttpStatus.OK, type: UpdatedAddressDto }],
     },
   },
   deleteById: <IRouteParams>{
     path: '/:id',
     method: RequestMethod.DELETE,
-    roles: [Role.ADMIN],
     swaggerInfo: {
       responses: [
         {

@@ -1,8 +1,10 @@
 import { RequestMethod } from '@nestjs/common';
 
+import { IRouteParams } from '@/decorators';
+
 export default {
   index: 'core',
-  health: {
+  health: <IRouteParams>{
     path: '/health',
     method: RequestMethod.GET,
     jwtSecure: false,

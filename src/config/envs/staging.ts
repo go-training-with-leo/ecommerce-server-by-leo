@@ -16,7 +16,7 @@ export const config = {
       rejectUnauthorized: false,
     },
     logging: true,
-    synchronize: true,
+    // synchronize: false,
     // autoLoadEntities: true,
   },
   token: {
