@@ -12,6 +12,7 @@ import type {
   CreateUserDto,
   UpdateUserDto,
   CreatedUserDto,
+  UpdatedUserDto,
   GotUserDetailDto,
 } from './dto';
 
@@ -75,7 +76,7 @@ export class UserService {
   }: {
     id: string;
     updateInfo: UpdateUserDto;
-  }): Promise<GotUserDto> {
+  }): Promise<UpdatedUserDto> {
     const { phoneNumber } = updateInfo;
 
     const user = await this.userRepository.findOneBy({ id });

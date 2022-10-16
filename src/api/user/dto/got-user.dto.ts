@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, IsOptional, IsPhoneNumber } from 'class-validator';
+import { IsEmail, IsString, IsPhoneNumber } from 'class-validator';
 
 import { Gender, Role } from '@/common/enums';
 import { ActionedBaseDto } from '@/common/dto';
 import { IsOnlyDate, IsValidGender, IsValidRole } from '@/decorators';
+import { GotAddressDto } from '@/api/address/dto/got-address.dto';
 
 class GotUserSessionDto extends ActionedBaseDto {}
 
@@ -12,7 +13,7 @@ export class GotUserDto extends ActionedBaseDto {
   @ApiProperty({
     enum: Role,
   })
-  role: Role;
+  role?: Role;
 
   @IsEmail()
   @ApiProperty({ format: 'email' })
@@ -26,7 +27,6 @@ export class GotUserDto extends ActionedBaseDto {
   @ApiProperty({ example: 'Lorem' })
   lastName: string;
 
-  @IsOptional()
   @IsValidGender()
   @ApiProperty({
     enum: Gender,
@@ -34,7 +34,6 @@ export class GotUserDto extends ActionedBaseDto {
   })
   gender?: Gender;
 
-  @IsOptional()
   @IsOnlyDate()
   @ApiProperty({
     format: 'date',
@@ -48,6 +47,9 @@ export class GotUserDto extends ActionedBaseDto {
 }
 
 export class GotUserDetailDto extends GotUserDto {
+  @ApiProperty({ isArray: true })
+  addresses: GotAddressDto;
+
   @ApiProperty({ isArray: true })
   sessions: GotUserSessionDto;
 }

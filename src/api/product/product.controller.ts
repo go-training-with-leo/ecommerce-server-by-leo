@@ -53,9 +53,9 @@ export class ProductController {
   }
 
   @InjectRoute(productRoutes.deleteById)
-  public async deleteById(@Param('id') uid: string): Promise<string> {
-    await this.productService.deleteById(uid);
+  public async deleteById(@Param('id') id: string): Promise<string> {
+    await this.productService.deleteById(id);
 
-    return uid;
+    return id;
   }
 }
