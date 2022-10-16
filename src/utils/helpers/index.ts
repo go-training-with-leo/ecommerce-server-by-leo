@@ -10,7 +10,8 @@ import entity from './entity';
 
 const getEnv = (): string => process.env.NODE_ENV || Env.DEVELOPMENT;
 
-const isDevelopmentEnv = (): boolean => getEnv() !== Env.PRODUCTION;
+const isDevelopmentEnv = (): boolean =>
+  getEnv() !== Env.PRODUCTION || getEnv() !== Env.STAGING;
 
 const isAdmin = (user: User): boolean => user?.role === Role.ADMIN;
 
