@@ -27,10 +27,6 @@ const dataSourceConfig: DataSourceOptions & {
   namingStrategy: new SnakeNamingStrategy(),
 };
 
-console.log(
-  '🚀 ~ file: ormconfig.ts ~ line 34 ~ isDevelopmentEnv(',
-  isDevelopmentEnv(),
-);
 if (!isDevelopmentEnv()) {
   dataSourceConfig.ssl = { rejectUnauthorized: false };
 }
