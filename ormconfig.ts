@@ -25,11 +25,12 @@ const dataSourceConfig: DataSourceOptions & {
   entities: [`${__dirname}/src/api/**/*.entity{.ts,.js}`],
   migrations: [`${__dirname}/src/database/migrations/**/*{.ts,.js}`],
   namingStrategy: new SnakeNamingStrategy(),
-  ssl: {
-    rejectUnauthorized: false,
-  },
 };
 
+console.log(
+  '🚀 ~ file: ormconfig.ts ~ line 34 ~ isDevelopmentEnv(',
+  isDevelopmentEnv(),
+);
 if (!isDevelopmentEnv()) {
   dataSourceConfig.ssl.rejectUnauthorized = false;
 }
