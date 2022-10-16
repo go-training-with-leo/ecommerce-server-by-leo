@@ -1,11 +1,10 @@
 import {
   IsString,
   MinLength,
-  IsNotEmpty,
   IsOptional,
   IsPhoneNumber,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 import { Gender } from '@/common/enums';
 import { IsOnlyDate, IsValidGender } from '@/decorators';
@@ -13,9 +12,8 @@ import { IsOnlyDate, IsValidGender } from '@/decorators';
 export class UpdateUserDto {
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
   @MinLength(8)
-  @ApiProperty({
+  @ApiPropertyOptional({
     format: 'password',
     required: false,
   })
@@ -23,36 +21,30 @@ export class UpdateUserDto {
 
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   firstName?: string;
 
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   lastName?: string;
 
   @IsOptional()
   @IsValidGender()
-  @ApiProperty({
+  @ApiPropertyOptional({
     enum: Gender,
-    required: false,
   })
   gender?: Gender;
 
   @IsOptional()
-  @IsNotEmpty()
   @IsOnlyDate()
-  @ApiProperty({
+  @ApiPropertyOptional({
     format: 'date',
-    required: false,
   })
   bod?: Date;
 
-  @IsNotEmpty()
   @IsOptional()
   @IsPhoneNumber('VN')
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   phoneNumber?: string;
 }

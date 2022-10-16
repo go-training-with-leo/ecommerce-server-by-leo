@@ -75,9 +75,9 @@ export class UserController {
   }
 
   @InjectRoute(userRoutes.deleteById)
-  public async deleteById(@Param('id') uid: string): Promise<string> {
-    await this.userService.deleteById(uid);
+  public async deleteById(@Param('id') id: string): Promise<string> {
+    await this.userService.deleteById(id);
 
-    return uid;
+    return id;
   }
 }

@@ -5,6 +5,7 @@ import { Column, Entity, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 import { Token } from '@/api/token/entities';
 import { Gender, Role } from '@/common/enums';
 import userRoutes from '@/api/user/user.routes';
+import { Address } from '@/api/address/entities';
 import { entity, enumh, hash } from '@/utils/helpers';
 import { Base as BaseEntity } from '@/common/entities';
 
@@ -13,15 +14,15 @@ export class User extends BaseEntity {
   @Column({
     type: 'enum',
     enum: Role,
-    default: enumh.getFirstValue<typeof Role>(Role),
+    default: Role[enumh?.getFirstValue<typeof Role>(Role)],
   })
   role?: Role;
 
   @Column({ unique: true })
   email: string;
 
-  @Column()
   @Exclude()
+  @Column()
   password: string;
 
   @Column({ name: 'first_name' })
@@ -43,8 +44,20 @@ export class User extends BaseEntity {
   @Column({ name: 'phone_number', unique: true })
   phoneNumber: string;
 
+  @OneToMany(() => Address, (address) => address.createdBy, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  addresses: Address[];
+
+  @OneToMany(() => Token, (token) => token.createdBy, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  sessions: Token[];
+
   private parseDataBeforeAction(): void {
-    const plainRole = this.role ?? 'USER';
+    const plainRole = this.role || Role[enumh.getFirstValue<typeof Role>(Role)];
 
     if (entity.isValidFieldBeforeParse({ data: Role, value: plainRole })) {
       this.role = Number(Role?.[plainRole]);
@@ -71,12 +84,6 @@ export class User extends BaseEntity {
   private async setUpdatingData(): Promise<void> {
     this.parseDataBeforeAction();
   }
-
-  @OneToMany(() => Token, (token) => token.createdBy, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  sessions: Token[];
 
   public toResponse(): Omit<
     this,

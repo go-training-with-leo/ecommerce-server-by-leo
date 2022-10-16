@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, IsOptional, IsPhoneNumber } from 'class-validator';
+import { IsEmail, IsString, IsPhoneNumber } from 'class-validator';
 
 import { Gender, Role } from '@/common/enums';
 import { ActionedBaseDto } from '@/common/dto';
@@ -24,7 +24,6 @@ export class UpdatedUserDto extends ActionedBaseDto {
   @ApiProperty({ example: 'Lorem' })
   lastName: string;
 
-  @IsOptional()
   @IsValidGender()
   @ApiProperty({
     enum: Gender,
@@ -32,7 +31,6 @@ export class UpdatedUserDto extends ActionedBaseDto {
   })
   gender?: Gender;
 
-  @IsOptional()
   @IsOnlyDate()
   @ApiProperty({
     format: 'date',
