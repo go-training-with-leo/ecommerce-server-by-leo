@@ -32,7 +32,7 @@ console.log(
   isDevelopmentEnv(),
 );
 if (!isDevelopmentEnv()) {
-  dataSourceConfig.ssl.rejectUnauthorized = false;
+  dataSourceConfig.ssl = { rejectUnauthorized: false };
 }
 
 /**
