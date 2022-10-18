@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsInt, IsString, Min } from 'class-validator';
 
 import { ActionedBaseDto } from '@/common/dto';
 
@@ -14,9 +14,16 @@ export class GotProductDto extends ActionedBaseDto {
 
   @IsString()
   @ApiProperty({ example: 'Lorem' })
-  details: string;
+  detail: string;
 
   @IsString()
-  @ApiProperty({ example: 100 })
+  @ApiProperty({
+    example: 'Lorem',
+  })
+  garmentCare: string;
+
+  @Min(1)
+  @IsInt()
+  @ApiProperty({ example: 100, minimum: 1 })
   price: number;
 }

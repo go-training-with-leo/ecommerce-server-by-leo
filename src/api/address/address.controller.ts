@@ -4,16 +4,16 @@ import { InjectController, InjectRoute, ReqUser } from '@/decorators';
 
 import type { User } from '@/api/user/entities/user.entity';
 
-import addressRoutes from './address.routes';
-import { AddressService } from './address.service';
 import {
-  CreateAddressDto,
-  CreatedAddressDto,
-  GotAddressDetailDto,
   GotAddressDto,
   UpdateAddressDto,
+  CreateAddressDto,
   UpdatedAddressDto,
+  CreatedAddressDto,
+  GotAddressDetailDto,
 } from './dto';
+import addressRoutes from './address.routes';
+import { AddressService } from './address.service';
 
 @InjectController({ name: addressRoutes.index })
 export class AddressController {
@@ -52,13 +52,13 @@ export class AddressController {
     @Param('id') id: string,
     @Body() updateInfo: UpdateAddressDto,
   ): Promise<UpdatedAddressDto> {
-    const updatedUser = await this.addressService.updateById({
+    const updatedAddress = await this.addressService.updateById({
       id,
       user,
       updateInfo,
     });
 
-    return updatedUser;
+    return updatedAddress;
   }
 
   @InjectRoute(addressRoutes.deleteById)
@@ -66,7 +66,7 @@ export class AddressController {
     @ReqUser() user: User,
     @Param('id') id: string,
   ): Promise<string> {
-    await this.addressService.deleteById(user, id);
+    await this.addressService.deleteById({ id, user });
 
     return id;
   }

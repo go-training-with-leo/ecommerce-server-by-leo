@@ -1,38 +1,40 @@
-import { Role } from '@/common/enums';
-import { IRouteParams } from '@/decorators';
 import { HttpStatus, RequestMethod } from '@nestjs/common';
 
+import { Role } from '@/common/enums';
+import { IRouteParams } from '@/decorators';
 import {
-  GotProductDto,
-  CreatedProductDto,
-  UpdatedProductDto,
-  AddedDiscountProductDto,
+  GotDiscountDto,
+  CreatedDiscountDto,
+  UpdatedDiscountDto,
+  GotDiscountDetailDto,
 } from './dto';
 
 export default {
-  index: 'products',
+  index: 'discounts',
   create: <IRouteParams>{
     path: '/',
     method: RequestMethod.POST,
     roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: CreatedProductDto }],
+      responses: [{ status: HttpStatus.OK, type: CreatedDiscountDto }],
     },
   },
   getAll: <IRouteParams>{
     path: '/',
     method: RequestMethod.GET,
+    roles: [Role.ADMIN],
     swaggerInfo: {
       responses: [
-        { status: HttpStatus.OK, type: GotProductDto, isArray: true },
+        { status: HttpStatus.OK, type: GotDiscountDto, isArray: true },
       ],
     },
   },
   getById: <IRouteParams>{
     path: '/:id',
     method: RequestMethod.GET,
+    roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: GotProductDto }],
+      responses: [{ status: HttpStatus.OK, type: GotDiscountDetailDto }],
     },
   },
   updateById: <IRouteParams>{
@@ -40,15 +42,7 @@ export default {
     method: RequestMethod.PUT,
     roles: [Role.ADMIN],
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: UpdatedProductDto }],
-    },
-  },
-  addDiscountById: <IRouteParams>{
-    path: '/:id/discounts',
-    method: RequestMethod.PUT,
-    roles: [Role.ADMIN],
-    swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: AddedDiscountProductDto }],
+      responses: [{ status: HttpStatus.OK, type: UpdatedDiscountDto }],
     },
   },
   deleteById: <IRouteParams>{

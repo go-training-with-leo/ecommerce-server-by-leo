@@ -1,15 +1,16 @@
-import { Body, Param } from '@nestjs/common';
+import { Body, Param, Query } from '@nestjs/common';
 import { InjectController, InjectRoute } from '@/decorators';
 
 import productRoutes from './product.routes';
 import { ProductService } from './product.service';
 
-import { CreateProductDto, UpdateProductDto } from './dto';
-
-import type {
+import {
   GotProductDto,
+  UpdateProductDto,
+  CreateProductDto,
   CreatedProductDto,
   UpdatedProductDto,
+  AddedDiscountProductDto,
 } from './dto';
 
 @InjectController({ name: productRoutes.index })
@@ -41,15 +42,28 @@ export class ProductController {
 
   @InjectRoute(productRoutes.updateById)
   public async updateById(
-    @Param('id') uid: string,
+    @Param('id') id: string,
     @Body() updateInfo: UpdateProductDto,
   ): Promise<UpdatedProductDto> {
     const updatedProduct = await this.productService.updateById({
-      id: uid,
+      id,
       updateInfo,
     });
 
     return updatedProduct;
+  }
+
+  @InjectRoute(productRoutes.addDiscountById)
+  public async addDiscountById(
+    @Param('id') id: string,
+    @Query('discountId') discountId: string,
+  ): Promise<AddedDiscountProductDto> {
+    const addedDiscountProduct = await this.productService.addDiscount({
+      id,
+      discountId,
+    });
+
+    return addedDiscountProduct;
   }
 
   @InjectRoute(productRoutes.deleteById)

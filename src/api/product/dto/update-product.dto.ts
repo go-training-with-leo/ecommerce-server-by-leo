@@ -1,28 +1,30 @@
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Min, IsString, IsOptional, IsInt } from 'class-validator';
 
 export class UpdateProductDto {
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   name?: string;
 
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   description?: string;
 
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
-  details?: string;
+  @ApiPropertyOptional()
+  detail?: string;
 
   @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
+  garmentCare?: string;
+
+  @Min(1)
+  @IsInt()
+  @IsOptional()
+  @ApiPropertyOptional()
   price?: number;
 }
