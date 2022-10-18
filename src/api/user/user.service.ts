@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import type { DeleteResult, Repository } from 'typeorm';
@@ -61,11 +61,21 @@ export class UserService {
     return users.map((user) => user.toResponse());
   }
 
-  public async getById(id: string): Promise<GotUserDetailDto> {
+  private async getUserById(id: string): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id },
       relations: { sessions: true },
     });
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    return user;
+  }
+
+  public async getById(id: string): Promise<GotUserDetailDto> {
+    const user = await this.getUserById(id);
 
     return user.toResponse();
   }
@@ -79,7 +89,7 @@ export class UserService {
   }): Promise<UpdatedUserDto> {
     const { phoneNumber } = updateInfo;
 
-    const user = await this.userRepository.findOneBy({ id });
+    const user = await this.getUserById(id);
 
     if (phoneNumber && phoneNumber !== user?.phoneNumber) {
       const existedUser = await this.findOneByEmailOrPhoneNumber({

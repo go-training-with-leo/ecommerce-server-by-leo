@@ -49,6 +49,6 @@ export class GotAddressDto extends ActionedBaseDto {
 }
 
 export class GotAddressDetailDto extends GotAddressDto {
-  @ApiProperty({ type: () => User })
+  @ApiProperty({ enum: () => User })
   createdBy: GotUserDto;
 }

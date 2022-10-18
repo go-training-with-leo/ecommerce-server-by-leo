@@ -99,7 +99,13 @@ export class AddressService {
     return updatedAddress;
   }
 
-  public async deleteById(user: User, id: string): Promise<DeleteResult> {
+  public async deleteById({
+    id,
+    user,
+  }: {
+    user: User;
+    id: string;
+  }): Promise<DeleteResult> {
     await this.getById({ user, id });
 
     return this.addressRepository.delete({ id });

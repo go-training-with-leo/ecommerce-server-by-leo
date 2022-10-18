@@ -9,8 +9,9 @@ import { UserModule } from '@/api/user/user.module';
 import { AuthModule } from '@/api/auth/auth.module';
 import { TokenModule } from '@/api/token/token.module';
 import { DatabaseModule } from '@/database/database.module';
-// import { ProductModule } from '@/api/product/product.module';
+import { ProductModule } from '@/api/product/product.module';
 import { AddressModule } from '@/api/address/address.module';
+import { DiscountModule } from '@/api/discount/discount.module';
 
 const EnvSchema = {
   PORT: Joi.number(),
@@ -34,8 +35,9 @@ const EnvSchema = {
     AuthModule,
     UserModule,
     TokenModule,
-    // ProductModule,
+    ProductModule,
     AddressModule,
+    DiscountModule,
     DatabaseModule,
   ],
   controllers: [AppController],
