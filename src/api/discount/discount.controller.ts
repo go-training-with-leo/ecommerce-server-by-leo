@@ -21,9 +21,9 @@ export class DiscountController {
   public async create(
     @Body() discountInfo: CreateDiscountDto,
   ): Promise<CreatedDiscountDto> {
-    const createdUser = await this.discountService.create(discountInfo);
+    const createdDiscount = await this.discountService.create(discountInfo);
 
-    return createdUser;
+    return createdDiscount;
   }
 
   @InjectRoute(discountRoutes.getAll)
