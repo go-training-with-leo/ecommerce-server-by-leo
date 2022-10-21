@@ -3,7 +3,7 @@ import { Table, QueryRunner, MigrationInterface } from 'typeorm';
 import { enumh } from '@/utils/helpers';
 import { CodeAction, CodeStatus } from '@/common/enums';
 
-export class Code1663143716784 implements MigrationInterface {
+export class Code1666343022239 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
