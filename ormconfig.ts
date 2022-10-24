@@ -27,9 +27,9 @@ const dataSourceConfig: DataSourceOptions & {
   namingStrategy: new SnakeNamingStrategy(),
 };
 
-if (!isDevelopmentEnv()) {
-  dataSourceConfig.ssl = { rejectUnauthorized: false };
-}
+// if (!isDevelopmentEnv()) {
+dataSourceConfig.ssl = { rejectUnauthorized: false };
+// }
 
 /**
  * * I am trying to enhance config because I want to use configuration in config folder
