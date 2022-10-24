@@ -40,15 +40,6 @@ export class AdvancedExceptionFilter implements ExceptionFilter {
         };
       } else {
         const { name, message } = exception;
-        console.log(
-          '🚀 ~ file: base-exception.filter.ts ~ line 43 ~ AdvancedExceptionFilter ~ name, message',
-          name,
-          message,
-        );
-        console.log(
-          '🚀 ~ file: base-exception.filter.ts ~ line 43 ~ AdvancedExceptionFilter ~ exception',
-          exception,
-        );
 
         switch (name) {
           case 'ForbiddenException': {
@@ -91,7 +82,6 @@ export class AdvancedExceptionFilter implements ExceptionFilter {
           }
           default: {
             data = {
-              code: Exception.BAD_REQUEST_CODE,
               status,
               message,
             };

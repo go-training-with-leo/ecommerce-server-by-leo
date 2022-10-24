@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export interface IBaseExceptionResponse {
-  code: number;
+  code?: number;
   status: number;
   message: string;
   stack?: string;
