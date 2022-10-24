@@ -82,13 +82,16 @@ export class AdvancedExceptionFilter implements ExceptionFilter {
           }
           default: {
             data = {
-              status,
               message,
             };
 
             if (isDevelopment) {
-              data.stack = exception?.cause?.stack;
-              data.code = Exception.NOT_FOUND_CODE;
+              data = {
+                status,
+                message,
+                stack: exception?.cause?.stack,
+                code: Exception.NOT_FOUND_CODE,
+              };
 
               console.log("Exception Filter's Exception: ");
               console.log(exception);

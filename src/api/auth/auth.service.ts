@@ -46,10 +46,6 @@ export class AuthService {
       email,
       phoneNumber,
     });
-    console.log(
-      '🚀 ~ file: auth.service.ts ~ line 49 ~ AuthService ~ register ~ user',
-      user,
-    );
 
     if (user) {
       throw new UserAlreadyException();
@@ -164,10 +160,6 @@ export class AuthService {
   public async resetPassword(resetInfo: ResetPassword): Promise<string> {
     const { email } = resetInfo;
     const user = await this.checkExistedUserByEmail(email);
-    console.log(
-      '🚀 ~ file: auth.service.ts ~ line 165 ~ AuthService ~ resetPassword ~ user',
-      user,
-    );
 
     await this.handleUpdateCodeStatusByActionInfo({
       actionInfo: resetInfo,
