@@ -89,7 +89,7 @@ export class AdvancedExceptionFilter implements ExceptionFilter {
                 stack: exception?.cause?.stack,
               };
 
-              console.log("Exception Filter's Exception");
+              console.log("Exception Filter's Exception: ");
               console.log(exception);
             }
 
