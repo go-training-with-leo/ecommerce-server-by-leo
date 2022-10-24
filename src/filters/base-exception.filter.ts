@@ -90,13 +90,15 @@ export class AdvancedExceptionFilter implements ExceptionFilter {
             break;
           }
           default: {
+            data = {
+              code: Exception.BAD_REQUEST_CODE,
+              status,
+              message,
+            };
+
             if (isDevelopment) {
-              data = {
-                code: Exception.NOT_FOUND_CODE,
-                status,
-                message,
-                stack: exception?.cause?.stack,
-              };
+              data.stack = exception?.cause?.stack;
+              data.code = Exception.NOT_FOUND_CODE;
 
               console.log("Exception Filter's Exception: ");
               console.log(exception);
