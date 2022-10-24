@@ -22,6 +22,7 @@ export default {
   getAll: <IRouteParams>{
     path: '/',
     method: RequestMethod.GET,
+    jwtSecure: false,
     swaggerInfo: {
       responses: [
         { status: HttpStatus.OK, type: GotProductDto, isArray: true },
