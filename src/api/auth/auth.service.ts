@@ -46,6 +46,10 @@ export class AuthService {
       email,
       phoneNumber,
     });
+    console.log(
+      '🚀 ~ file: auth.service.ts ~ line 49 ~ AuthService ~ register ~ user',
+      user,
+    );
 
     if (user) {
       throw new UserAlreadyException();

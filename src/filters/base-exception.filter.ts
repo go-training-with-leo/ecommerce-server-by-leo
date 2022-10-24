@@ -40,6 +40,10 @@ export class AdvancedExceptionFilter implements ExceptionFilter {
         };
       } else {
         const { name, message } = exception;
+        console.log(
+          '🚀 ~ file: base-exception.filter.ts ~ line 43 ~ AdvancedExceptionFilter ~ exception',
+          exception,
+        );
 
         switch (name) {
           case 'ForbiddenException': {
