@@ -1,8 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  forwardRef,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { GotProductDto } from '@/api/product/dto';
+import { ProductService } from '@/api/product/product.service';
 
 import { Inventory } from './entities';
 
@@ -14,12 +20,16 @@ import type {
   UpdatedInventoryDto,
   GotInventoryDetailDto,
 } from './dto';
+import { product } from 'ramda';
 
 @Injectable()
 export class InventoryService {
   constructor(
     @InjectRepository(Inventory)
     private inventoryRepository: Repository<Inventory>,
+
+    @Inject(forwardRef(() => ProductService))
+    private productService: ProductService,
   ) {}
 
   public async create({
@@ -29,6 +39,25 @@ export class InventoryService {
     product: GotProductDto;
     inventoryInfo: CreateInventoryDto;
   }): Promise<CreatedInventoryDto> {
+    const createdInventory = this.inventoryRepository.create({
+      ...inventoryInfo,
+      product,
+    });
+
+    await this.inventoryRepository.save(createdInventory);
+
+    return createdInventory;
+  }
+
+  public async createWithProductId({
+    productId,
+    inventoryInfo,
+  }: {
+    productId: string;
+    inventoryInfo: CreateInventoryDto;
+  }): Promise<CreatedInventoryDto> {
+    const product = await this.productService.getBasicById(productId);
+
     const createdInventory = this.inventoryRepository.create({
       ...inventoryInfo,
       product,

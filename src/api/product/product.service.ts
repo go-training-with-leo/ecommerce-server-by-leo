@@ -1,5 +1,10 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 import type { DeleteResult, Repository } from 'typeorm';
 
@@ -27,8 +32,10 @@ export class ProductService {
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
 
-    private discountService: DiscountService,
+    @Inject(forwardRef(() => InventoryService))
     private inventoryService: InventoryService,
+
+    private discountService: DiscountService,
   ) {}
 
   public async create(
@@ -63,9 +70,7 @@ export class ProductService {
   }
 
   public async getBasicById(id: string): Promise<GotProductDto> {
-    const product = await this.productRepository.findOne({
-      where: { id },
-    });
+    const product = await this.productRepository.findOneBy({ id });
 
     if (!product) {
       throw new NotFoundException();

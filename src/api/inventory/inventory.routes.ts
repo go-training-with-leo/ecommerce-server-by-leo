@@ -13,7 +13,7 @@ import { UpdatedInventoryDto } from './dto/updated-inventory.dto.';
 export default {
   index: 'inventories',
   create: <IRouteParams>{
-    path: '/',
+    path: '/products/:productId',
     method: RequestMethod.POST,
     swaggerInfo: {
       responses: [

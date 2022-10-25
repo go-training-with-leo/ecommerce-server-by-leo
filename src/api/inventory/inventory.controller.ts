@@ -7,6 +7,8 @@ import {
   UpdateInventoryDto,
   UpdatedInventoryDto,
   GotInventoryDetailDto,
+  CreateInventoryDto,
+  CreatedInventoryDto,
 } from './dto';
 import inventoryRoutes from './inventory.routes';
 import { InventoryService } from './inventory.service';
@@ -14,6 +16,19 @@ import { InventoryService } from './inventory.service';
 @InjectController({ name: inventoryRoutes.index })
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
+
+  @InjectRoute(inventoryRoutes.create)
+  public async create(
+    @Param('productId') productId: string,
+    @Body() inventoryInfo: CreateInventoryDto,
+  ): Promise<CreatedInventoryDto> {
+    const createdInventory = await this.inventoryService.createWithProductId({
+      productId,
+      inventoryInfo,
+    });
+
+    return createdInventory;
+  }
 
   @InjectRoute(inventoryRoutes.getAll)
   public async getAll(): Promise<GotInventoryDto[]> {
