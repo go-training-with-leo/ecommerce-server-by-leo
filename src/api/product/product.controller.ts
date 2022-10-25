@@ -12,7 +12,9 @@ import {
   UpdatedProductDto,
   AddDiscountProductDto,
   AddedDiscountProductDto,
+  AddedInventoryProductDto,
 } from './dto';
+import { AddInventoryProductDto } from './dto/add-inventory-product.dto';
 
 @InjectController({ name: productRoutes.index })
 export class ProductController {
@@ -67,6 +69,19 @@ export class ProductController {
     });
 
     return addedDiscountProduct;
+  }
+
+  @InjectRoute(productRoutes.addInventoryById)
+  public async addInventoryById(
+    @Param('id') id: string,
+    @Body() inventoryInfo: AddInventoryProductDto,
+  ): Promise<AddedInventoryProductDto> {
+    const createdInventory = await this.productService.addInventory({
+      id,
+      inventoryInfo,
+    });
+
+    return createdInventory;
   }
 
   @InjectRoute(productRoutes.deleteById)

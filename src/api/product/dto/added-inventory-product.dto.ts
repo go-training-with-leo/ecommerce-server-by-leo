@@ -2,9 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsString, Min } from 'class-validator';
 
 import { ActionedBaseDto } from '@/common/dto';
-import { GotDiscountDto } from '@/api/discount/dto';
+import { GotInventoryDto } from '@/api/inventory/dto';
 
-export class AddedDiscountProductDto extends ActionedBaseDto {
+export class AddedInventoryProductDto extends ActionedBaseDto {
   @IsString()
   @ApiProperty({ example: 'Lorem' })
   name: string;
@@ -28,6 +28,6 @@ export class AddedDiscountProductDto extends ActionedBaseDto {
   @ApiProperty({ example: 100, minimum: 1 })
   price: number;
 
-  @ApiProperty()
-  discount?: GotDiscountDto;
+  @ApiProperty({ isArray: true, type: () => GotInventoryDto })
+  inventories?: GotInventoryDto[];
 }
