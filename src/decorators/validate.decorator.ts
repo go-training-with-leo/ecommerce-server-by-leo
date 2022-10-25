@@ -26,3 +26,11 @@ export function IsValidRole() {
     }),
   );
 }
+
+export function IsValidSize() {
+  return applyDecorators(
+    Matches(Regex.SIZE, 'i', {
+      message: `$property must match ${Regex.SIZE}.`,
+    }),
+  );
+}

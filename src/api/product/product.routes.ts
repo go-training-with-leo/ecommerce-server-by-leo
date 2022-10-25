@@ -6,7 +6,9 @@ import {
   GotProductDto,
   CreatedProductDto,
   UpdatedProductDto,
+  GotProductDetailDto,
   AddedDiscountProductDto,
+  AddedInventoryProductDto,
 } from './dto';
 
 export default {
@@ -25,7 +27,7 @@ export default {
     jwtSecure: false,
     swaggerInfo: {
       responses: [
-        { status: HttpStatus.OK, type: GotProductDto, isArray: true },
+        { status: HttpStatus.OK, type: GotProductDetailDto, isArray: true },
       ],
     },
   },
@@ -52,6 +54,15 @@ export default {
       responses: [{ status: HttpStatus.OK, type: AddedDiscountProductDto }],
     },
   },
+  addInventoryById: <IRouteParams>{
+    path: '/:id/inventories',
+    method: RequestMethod.PUT,
+    roles: [Role.ADMIN],
+    swaggerInfo: {
+      responses: [{ status: HttpStatus.OK, type: AddedInventoryProductDto }],
+    },
+  },
+
   deleteById: <IRouteParams>{
     path: '/:id',
     method: RequestMethod.DELETE,
