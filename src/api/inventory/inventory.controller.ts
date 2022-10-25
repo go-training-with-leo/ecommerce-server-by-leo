@@ -1,8 +1,6 @@
 import { Body, Param } from '@nestjs/common';
 
-import { InjectController, InjectRoute, ReqUser } from '@/decorators';
-
-import type { User } from '@/api/user/entities/user.entity';
+import { InjectController, InjectRoute } from '@/decorators';
 
 import {
   GotInventoryDto,
