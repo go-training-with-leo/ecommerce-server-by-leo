@@ -80,6 +80,12 @@ export class UserService {
     return user.toResponse();
   }
 
+  public async getByEmail(email: string): Promise<GotUserDto> {
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    return user;
+  }
+
   public async updateById({
     id,
     updateInfo,

@@ -20,7 +20,6 @@ import type {
   UpdatedInventoryDto,
   GotInventoryDetailDto,
 } from './dto';
-import { product } from 'ramda';
 
 @Injectable()
 export class InventoryService {

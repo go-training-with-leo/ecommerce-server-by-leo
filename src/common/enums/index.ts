@@ -11,6 +11,7 @@ enum Role {
 
 enum CodeAction {
   RESET_PASSWORD = 0,
+  DISCOUNT = 1,
 }
 
 enum CodeStatus {
