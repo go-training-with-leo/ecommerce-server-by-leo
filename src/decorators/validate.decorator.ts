@@ -34,3 +34,11 @@ export function IsValidSize() {
     }),
   );
 }
+
+export function IsValidCodeAction() {
+  return applyDecorators(
+    Matches(Regex.CODE_ACTION, 'i', {
+      message: `$property must match ${Regex.CODE_ACTION}.`,
+    }),
+  );
+}

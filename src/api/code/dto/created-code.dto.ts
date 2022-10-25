@@ -1,27 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsUUID } from 'class-validator';
 
 import { enumh } from '@/utils/helpers';
 import { CodeAction } from '@/common/enums';
+import { ActionedBaseDto } from '@/common/dto';
 import { IsValidCodeAction } from '@/decorators';
 
-export class CreateCodeDto {
+export class CreatedCodeDto extends ActionedBaseDto {
   @IsEmail()
-  @IsNotEmpty()
   @ApiProperty({
     format: 'email',
   })
   email: string;
 
+  @IsUUID()
+  @ApiProperty({ format: 'uuid' })
+  code: string;
+
   @IsValidCodeAction()
-  @IsNotEmpty()
   @ApiProperty({
     enum: CodeAction,
     default: CodeAction[enumh?.getFirstValue<typeof CodeAction>(CodeAction)],
   })
   action: CodeAction;
 
-  @IsNotEmpty()
   @ApiProperty({ example: 30000 })
   expiresIn: number;
 }

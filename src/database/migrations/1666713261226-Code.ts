@@ -3,7 +3,7 @@ import { Table, QueryRunner, MigrationInterface } from 'typeorm';
 import { enumh } from '@/utils/helpers';
 import { CodeAction, CodeStatus } from '@/common/enums';
 
-export class Code1666343022239 implements MigrationInterface {
+export class Code1666713261226 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -30,7 +30,7 @@ export class Code1666343022239 implements MigrationInterface {
             name: 'action',
             type: 'enum',
             enum: enumh.getValuesAndToString<typeof CodeAction>(CodeAction),
-            enumName: 'codes_action_type_enum',
+            enumName: 'codes_action_type_enum2',
             isNullable: true,
           },
           {
