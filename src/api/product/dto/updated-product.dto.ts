@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsString, Min } from 'class-validator';
 
 import { ActionedBaseDto } from '@/common/dto';
-import { Category } from '@/api/category/entities';
 import { GotCategoryDto } from '@/api/category/dto';
 
 export class UpdatedProductDto extends ActionedBaseDto {
@@ -27,6 +26,6 @@ export class UpdatedProductDto extends ActionedBaseDto {
   @ApiProperty({ example: 100 })
   price: number;
 
-  @ApiProperty({ enum: () => Category })
+  @ApiProperty({ type: () => GotCategoryDto })
   category: GotCategoryDto;
 }

@@ -30,6 +30,6 @@ export class GotDiscountDto extends ActionedBaseDto {
 }
 
 export class GotDiscountDetailDto extends GotDiscountDto {
-  @ApiProperty({ enum: () => Product })
+  @ApiProperty({ type: () => GotProductDto })
   products: GotProductDto[];
 }

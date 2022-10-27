@@ -3,7 +3,6 @@ import { IRouteParams } from '@/decorators';
 import { HttpStatus, RequestMethod } from '@nestjs/common';
 
 import {
-  GotProductDto,
   CreatedProductDto,
   UpdatedProductDto,
   GotProductDetailDto,
@@ -35,7 +34,7 @@ export default {
     path: '/:id',
     method: RequestMethod.GET,
     swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: GotProductDto }],
+      responses: [{ status: HttpStatus.OK, type: GotProductDetailDto }],
     },
   },
   updateById: <IRouteParams>{
