@@ -2,6 +2,7 @@ import { Exclude } from 'class-transformer';
 import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import { Size } from '@/common/enums';
+import { Category } from '@/api/category/entities';
 import { Discount } from '@/api/discount/entities';
 import { Inventory } from '@/api/inventory/entities';
 import { Base as BaseEntity } from '@/common/entities';
@@ -23,6 +24,13 @@ export class Product extends BaseEntity {
 
   @Column({ type: 'int4' })
   price: number;
+
+  @ManyToOne(() => Category, (category) => category.products, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 
   @ManyToOne(() => Discount, (discount) => discount.products, {
     onDelete: 'CASCADE',

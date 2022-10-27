@@ -1,6 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { CategoryModule } from '@/api/category/category.module';
 import { DiscountModule } from '@/api/discount/discount.module';
 import { InventoryModule } from '@/api/inventory/inventory.module';
 
@@ -11,6 +12,7 @@ import { ProductController } from './product.controller';
 @Module({
   imports: [
     DiscountModule,
+    CategoryModule,
     forwardRef(() => InventoryModule),
     TypeOrmModule.forFeature([Product]),
   ],

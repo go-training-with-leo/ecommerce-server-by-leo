@@ -7,7 +7,7 @@ import { IsOnlyDate, IsValidGender, IsValidRole } from '@/decorators';
 
 export class RegisteredDto extends ActionedBaseDto {
   @IsValidRole()
-  @ApiProperty({ enum: Role })
+  @ApiProperty({ enum: () => Role })
   role: Role;
 
   @IsEmail()

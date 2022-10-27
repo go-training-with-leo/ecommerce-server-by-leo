@@ -4,6 +4,10 @@ import { IsInt, IsString, Min } from 'class-validator';
 import { ActionedBaseDto } from '@/common/dto';
 import { GotInventoryDto } from '@/api/inventory/dto';
 import { GotDiscountDto } from '@/api/discount/dto';
+import { Category } from '@/api/category/entities';
+import { GotCategoryDto } from '@/api/category/dto';
+import { Discount } from '@/api/discount/entities';
+import { Inventory } from '@/api/inventory/entities';
 
 export class GotProductDto extends ActionedBaseDto {
   @IsString()
@@ -31,9 +35,12 @@ export class GotProductDto extends ActionedBaseDto {
 }
 
 export class GotProductDetailDto extends GotProductDto {
-  @ApiProperty()
+  @ApiProperty({ enum: () => Discount })
   discount?: GotDiscountDto;
 
-  @ApiProperty({ type: () => GotInventoryDto, isArray: true })
+  @ApiProperty({ enum: () => Category })
+  category: GotCategoryDto;
+
+  @ApiProperty({ enum: () => Inventory, isArray: true })
   inventories?: GotInventoryDto[];
 }

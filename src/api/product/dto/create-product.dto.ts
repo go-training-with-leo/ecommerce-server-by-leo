@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsInt, Min } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, Min, IsUUID } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
@@ -38,4 +38,9 @@ export class CreateProductDto {
     minimum: 1,
   })
   price: number;
+
+  @IsUUID()
+  @IsNotEmpty()
+  @ApiProperty({ format: 'uuid' })
+  category: string;
 }
