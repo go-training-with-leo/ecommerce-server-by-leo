@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty } from 'class-validator';
 
-import { User } from '@/api/user/entities';
 import { GotUserDto } from '@/api/user/dto';
 
 export class CreateTokenDto {
@@ -14,6 +13,6 @@ export class CreateTokenDto {
   accessToken: string;
 
   @IsNotEmpty()
-  @ApiProperty({ enum: () => User })
+  @ApiProperty({ type: () => GotUserDto })
   createdBy: GotUserDto;
 }

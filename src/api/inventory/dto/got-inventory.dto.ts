@@ -28,6 +28,6 @@ export class GotInventoryDto extends ActionedBaseDto {
 }
 
 export class GotInventoryDetailDto extends GotInventoryDto {
-  @ApiProperty({ enum: () => User })
+  @ApiProperty({ type: () => GotProductDto })
   product: GotProductDto;
 }

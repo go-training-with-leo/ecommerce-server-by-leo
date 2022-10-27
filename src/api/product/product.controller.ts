@@ -5,7 +5,6 @@ import productRoutes from './product.routes';
 import { ProductService } from './product.service';
 
 import {
-  GotProductDto,
   UpdateProductDto,
   CreateProductDto,
   CreatedProductDto,
@@ -13,6 +12,7 @@ import {
   AddDiscountProductDto,
   AddedDiscountProductDto,
   AddedInventoryProductDto,
+  GotProductDetailDto,
 } from './dto';
 import { AddInventoryProductDto } from './dto/add-inventory-product.dto';
 
@@ -30,14 +30,14 @@ export class ProductController {
   }
 
   @InjectRoute(productRoutes.getAll)
-  public async getAll(): Promise<GotProductDto[]> {
+  public async getAll(): Promise<GotProductDetailDto[]> {
     const gotProducts = await this.productService.getAll();
 
     return gotProducts;
   }
 
   @InjectRoute(productRoutes.getById)
-  public async getById(@Param('id') uid: string): Promise<GotProductDto> {
+  public async getById(@Param('id') uid: string): Promise<GotProductDetailDto> {
     const gotProduct = await this.productService.getById(uid);
 
     return gotProduct;

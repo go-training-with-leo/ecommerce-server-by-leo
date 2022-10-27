@@ -65,7 +65,7 @@ export class ProductService {
     return products.map((product) => product.toResponse());
   }
 
-  public async getById(id: string): Promise<GotProductDto> {
+  public async getById(id: string): Promise<GotProductDetailDto> {
     const product = await this.productRepository.findOne({
       where: { id },
       relations: { discount: true, category: true, inventories: true },
