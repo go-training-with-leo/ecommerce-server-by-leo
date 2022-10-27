@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Min, IsString, IsOptional, IsInt } from 'class-validator';
+import { Min, IsString, IsOptional, IsInt, IsUUID } from 'class-validator';
 
 export class UpdateProductDto {
   @IsString()
@@ -27,4 +27,9 @@ export class UpdateProductDto {
   @IsOptional()
   @ApiPropertyOptional()
   price?: number;
+
+  @IsUUID()
+  @IsOptional()
+  @ApiPropertyOptional({ format: 'uuid' })
+  category: string;
 }

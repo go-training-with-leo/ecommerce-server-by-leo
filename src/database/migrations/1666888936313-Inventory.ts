@@ -9,7 +9,7 @@ import {
 import { Size } from '@/common/enums';
 import { enumh } from '@/utils/helpers';
 
-export class Inventory1666682553782 implements MigrationInterface {
+export class Inventory1666888936313 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({

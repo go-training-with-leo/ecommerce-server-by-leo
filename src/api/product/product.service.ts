@@ -9,6 +9,7 @@ import {
 import type { DeleteResult, Repository } from 'typeorm';
 
 import { CreateInventoryDto } from '@/api/inventory/dto';
+import { CategoryService } from '@/api/category/category.service';
 import { DiscountService } from '@/api/discount/discount.service';
 import { InventoryService } from '@/api/inventory/inventory.service';
 
@@ -36,12 +37,20 @@ export class ProductService {
     private inventoryService: InventoryService,
 
     private discountService: DiscountService,
+    private categoryService: CategoryService,
   ) {}
 
   public async create(
     productInfo: CreateProductDto,
   ): Promise<CreatedProductDto> {
-    const createdProduct = await this.productRepository.create(productInfo);
+    const category = await this.categoryService.getBasicById(
+      productInfo?.category,
+    );
+
+    const createdProduct = await this.productRepository.create({
+      ...productInfo,
+      category,
+    });
 
     await this.productRepository.save(createdProduct);
 
@@ -50,7 +59,7 @@ export class ProductService {
 
   public async getAll(): Promise<GotProductDetailDto[]> {
     const products = await this.productRepository.find({
-      relations: { discount: true, inventories: true },
+      relations: { discount: true, category: true, inventories: true },
     });
 
     return products.map((product) => product.toResponse());
@@ -59,7 +68,7 @@ export class ProductService {
   public async getById(id: string): Promise<GotProductDto> {
     const product = await this.productRepository.findOne({
       where: { id },
-      relations: { discount: true, inventories: true },
+      relations: { discount: true, category: true, inventories: true },
     });
 
     if (!product) {
@@ -69,8 +78,11 @@ export class ProductService {
     return product.toResponse();
   }
 
-  public async getBasicById(id: string): Promise<GotProductDto> {
-    const product = await this.productRepository.findOneBy({ id });
+  public async getBasicById(id: string): Promise<GotProductDetailDto> {
+    const product = await this.productRepository.findOne({
+      where: { id },
+      relations: { discount: true, category: true },
+    });
 
     if (!product) {
       throw new NotFoundException();
@@ -88,9 +100,14 @@ export class ProductService {
   }): Promise<UpdatedProductDto> {
     const product = await this.getBasicById(id);
 
+    const category =
+      (await this.categoryService.getBasicById(updateInfo?.category)) ||
+      product?.category;
+
     const updatedProduct = await this.productRepository.create({
       ...product,
       ...updateInfo,
+      category,
     });
 
     await this.productRepository.save(updatedProduct);

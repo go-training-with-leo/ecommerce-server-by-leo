@@ -12,6 +12,7 @@ import { DatabaseModule } from '@/database/database.module';
 import { ProductModule } from '@/api/product/product.module';
 import { AddressModule } from '@/api/address/address.module';
 import { DiscountModule } from '@/api/discount/discount.module';
+import { CategoryModule } from '@/api/category/category.module';
 
 const EnvSchema = {
   PORT: Joi.number(),
@@ -39,6 +40,7 @@ const EnvSchema = {
     AddressModule,
     DiscountModule,
     DatabaseModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [],

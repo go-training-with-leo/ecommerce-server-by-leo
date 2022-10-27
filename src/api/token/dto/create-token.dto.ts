@@ -14,6 +14,6 @@ export class CreateTokenDto {
   accessToken: string;
 
   @IsNotEmpty()
-  @ApiProperty({ type: () => User })
+  @ApiProperty({ enum: () => User })
   createdBy: GotUserDto;
 }
