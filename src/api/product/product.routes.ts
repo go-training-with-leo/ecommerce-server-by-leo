@@ -33,6 +33,7 @@ export default {
   getById: <IRouteParams>{
     path: '/:id',
     method: RequestMethod.GET,
+    jwtSecure: false,
     swaggerInfo: {
       responses: [{ status: HttpStatus.OK, type: GotProductDetailDto }],
     },
