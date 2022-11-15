@@ -1,17 +1,21 @@
 import { v4 as uuid } from 'uuid';
 import { Body, Param } from '@nestjs/common';
-import { InjectController, InjectRoute } from '@/decorators';
+
+import { User } from '@/api/user/entities';
+import { InjectController, InjectRoute, ReqUser } from '@/decorators';
 
 import codeRoutes from './code.routes';
 import { CodeService } from './code.service';
 
 import {
-  CreateCodeDto,
-  CreatedCodeDto,
   GotCodeDto,
+  CreateCodeDto,
   UpdateCodeDto,
+  CreatedCodeDto,
   UpdatedCodeDto,
+  VerifyCouponDto,
 } from './dto';
+import { CodeAction } from '@/common/enums';
 
 @InjectController({ name: codeRoutes.index })
 export class CodeController {
@@ -53,5 +57,18 @@ export class CodeController {
     await this.codeService.deleteById(id);
 
     return id;
+  }
+
+  @InjectRoute(codeRoutes.verifyCoupon)
+  public async verifyCoupon(
+    @ReqUser() user: User,
+    @Body() verifyInfo: VerifyCouponDto,
+  ): Promise<GotCodeDto> {
+    const code = await this.codeService.verifyCoupon({
+      user,
+      verifyInfo,
+    });
+
+    return code;
   }
 }
