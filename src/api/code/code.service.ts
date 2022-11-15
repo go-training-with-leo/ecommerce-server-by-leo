@@ -2,18 +2,20 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
+import { User } from '@/api/user/entities';
+import { UserService } from '@/api/user/user.service';
 import { CodeAction, CodeStatus } from '@/common/enums';
 
 import { Code } from './entities';
 import { WrongCodeInformationException } from './code.exceptions';
 
 import type {
-  CreateCodeDto,
   GotCodeDto,
+  CreateCodeDto,
   UpdateCodeDto,
   UpdatedCodeDto,
+  VerifyCouponDto,
 } from './dto';
-import { UserService } from '../user/user.service';
 
 export interface ICodeInfoParams {
   code: string;
@@ -107,5 +109,27 @@ export class CodeService {
 
   public async deleteById(id: string): Promise<DeleteResult> {
     return this.codeRepository.delete({ id });
+  }
+
+  public async verifyCoupon({
+    verifyInfo,
+    user,
+  }: {
+    user: User;
+    verifyInfo: VerifyCouponDto;
+  }): Promise<GotCodeDto> {
+    const code = await this.codeRepository.findOne({
+      where: {
+        code: verifyInfo?.code,
+        email: user?.email,
+        action: CodeAction.DISCOUNT,
+      },
+    });
+
+    if (!code) {
+      throw new NotFoundException();
+    }
+
+    return code.toResponse();
   }
 }

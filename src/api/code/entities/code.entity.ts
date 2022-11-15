@@ -45,21 +45,18 @@ export class Code extends BaseEntity {
       this.action = Number(CodeAction[plainAction]);
     }
 
-    if (
-      entity.isValidFieldBeforeParse({
-        data: CodeStatus,
-        value: this.status,
-      })
-    ) {
-      const plainStatus = this.status ?? CodeStatus[CodeStatus.IS_CREATED];
+    const plainStatus = this.status ?? CodeStatus[CodeStatus.IS_CREATED];
 
-      this.status = Number(CodeStatus?.[plainStatus]);
-    }
+    this.status = Number(CodeStatus?.[plainStatus]);
   }
 
   @BeforeInsert()
+  private async formatInsertedData(): Promise<void> {
+    this.parseDataBeforeAction();
+  }
+
   @BeforeUpdate()
-  private async formatInsertedOrUpdatedData(): Promise<void> {
+  private async formatUpdatedData(): Promise<void> {
     this.parseDataBeforeAction();
   }
 
