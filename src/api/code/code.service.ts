@@ -1,10 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  forwardRef,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { User } from '@/api/user/entities';
+import { MailService } from '@/mail/mail.service';
 import { UserService } from '@/api/user/user.service';
 import { CodeAction, CodeStatus } from '@/common/enums';
+import { WrongCredentialsException } from '@/api/auth/auth.exceptions';
 
 import { Code } from './entities';
 import { WrongCodeInformationException } from './code.exceptions';
@@ -30,6 +37,9 @@ export class CodeService {
     private codeRepository: Repository<Code>,
 
     private userService: UserService,
+
+    @Inject(forwardRef(() => MailService))
+    private mailService: MailService,
   ) {}
 
   public async create(
@@ -109,6 +119,18 @@ export class CodeService {
 
   public async deleteById(id: string): Promise<DeleteResult> {
     return this.codeRepository.delete({ id });
+  }
+
+  public async createCoupon(email: string): Promise<string> {
+    const user = await this.userService.findOneByEmail(email);
+
+    if (!user) {
+      throw new WrongCredentialsException();
+    }
+
+    await this.mailService.sendCouponCode(user);
+
+    return user?.email;
   }
 
   public async verifyCoupon({

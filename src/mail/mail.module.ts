@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
@@ -10,7 +10,7 @@ import { MailService } from './mail.service';
 
 @Module({
   imports: [
-    CodeModule,
+    forwardRef(() => CodeModule),
     ConfigModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],

@@ -15,7 +15,7 @@ import {
   UpdatedCodeDto,
   VerifyCouponDto,
 } from './dto';
-import { CodeAction } from '@/common/enums';
+import { CreateCouponDto } from './dto/create-coupon';
 
 @InjectController({ name: codeRoutes.index })
 export class CodeController {
@@ -57,6 +57,17 @@ export class CodeController {
     await this.codeService.deleteById(id);
 
     return id;
+  }
+
+  @InjectRoute(codeRoutes.createCoupon)
+  public async createCoupon(
+    @Body() createCouponInfo: CreateCouponDto,
+  ): Promise<string> {
+    const sentEmail = await this.codeService.createCoupon(
+      createCouponInfo?.email,
+    );
+
+    return sentEmail;
   }
 
   @InjectRoute(codeRoutes.verifyCoupon)

@@ -49,6 +49,22 @@ export default {
       ],
     },
   },
+  createCoupon: <IRouteParams>{
+    path: '/creates-coupon',
+    method: RequestMethod.POST,
+    roles: [Role.ADMIN],
+    swaggerInfo: {
+      responses: [
+        {
+          status: HttpStatus.OK,
+          schema: {
+            type: 'string',
+            example: 'user@gmail.com',
+          },
+        },
+      ],
+    },
+  },
   verifyCoupon: <IRouteParams>{
     path: '/verifies-coupon',
     method: RequestMethod.POST,
