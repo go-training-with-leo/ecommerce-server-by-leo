@@ -66,4 +66,12 @@ export class CreateInvoiceDto {
   @IsUUID()
   @ApiProperty({ format: 'uuid' })
   discountCode?: string;
+
+  @ApiProperty({ isArray: true })
+  detailItems: {
+    inventory: string;
+    amount: number;
+    total: number;
+    discount: number;
+  }[];
 }

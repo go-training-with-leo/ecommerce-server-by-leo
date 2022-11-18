@@ -59,7 +59,13 @@ export class ProductService {
 
   public async getAll(): Promise<GotProductDetailDto[]> {
     const products = await this.productRepository.find({
-      relations: { discount: true, category: true, inventories: true },
+      relations: {
+        discount: true,
+        category: true,
+        inventories: {
+          detailInvoiceItems: true,
+        },
+      },
     });
 
     return products.map((product) => product.toResponse());

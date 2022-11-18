@@ -10,7 +10,7 @@ export class DetailInvoiceItem1668760259722 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'detail_invoice_items',
+        name: 'detail-invoice-items',
         columns: [
           {
             name: 'id',
@@ -47,7 +47,7 @@ export class DetailInvoiceItem1668760259722 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'detail_invoice_items',
+      'detail-invoice-items',
       new TableColumn({
         name: 'inventory_id',
         type: 'uuid',
@@ -55,7 +55,7 @@ export class DetailInvoiceItem1668760259722 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'detail_invoice_items',
+      'detail-invoice-items',
       new TableForeignKey({
         columnNames: ['inventory_id'],
         referencedColumnNames: ['id'],
@@ -66,7 +66,7 @@ export class DetailInvoiceItem1668760259722 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'detail_invoice_items',
+      'detail-invoice-items',
       new TableColumn({
         name: 'invoice_id',
         type: 'uuid',
@@ -74,7 +74,7 @@ export class DetailInvoiceItem1668760259722 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'detail_invoice_items',
+      'detail-invoice-items',
       new TableForeignKey({
         columnNames: ['invoice_id'],
         referencedColumnNames: ['id'],
@@ -86,20 +86,20 @@ export class DetailInvoiceItem1668760259722 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable('detail_invoice_items');
+    const table = await queryRunner.getTable('detail-invoice-items');
 
     const foreignKey1 = table.foreignKeys.find(
       (fk) => fk.columnNames.indexOf('inventory_id') !== -1,
     );
-    await queryRunner.dropForeignKey('detail_invoice_items', foreignKey1);
-    await queryRunner.dropColumn('detail_invoice_items', 'inventory_id');
+    await queryRunner.dropForeignKey('detail-invoice-items', foreignKey1);
+    await queryRunner.dropColumn('detail-invoice-items', 'inventory_id');
 
     const foreignKey2 = table.foreignKeys.find(
       (fk) => fk.columnNames.indexOf('invoice_id') !== -1,
     );
-    await queryRunner.dropForeignKey('detail_invoice_items', foreignKey2);
-    await queryRunner.dropColumn('detail_invoice_items', 'invoice_id');
+    await queryRunner.dropForeignKey('detail-invoice-items', foreignKey2);
+    await queryRunner.dropColumn('detail-invoice-items', 'invoice_id');
 
-    await queryRunner.dropTable('detail_invoice_items');
+    await queryRunner.dropTable('detail-invoice-items');
   }
 }

@@ -7,6 +7,8 @@ import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import type { User } from '@/api/user/entities';
+import { isAdmin } from '@/utils/helpers';
+import { DetailInvoiceItemService } from '@/api/detail-invoice-item/detail-invoice-item.service';
 
 import { Invoice } from './entities';
 
@@ -18,25 +20,33 @@ import type {
   UpdatedInvoiceDto,
   GotInvoiceDetailDto,
 } from './dto';
-import { isAdmin } from '@/utils/helpers';
 
 @Injectable()
 export class InvoiceService {
   constructor(
     @InjectRepository(Invoice)
     private invoiceRepository: Repository<Invoice>,
+
+    private detailInvoiceItemService: DetailInvoiceItemService,
   ) {}
 
   public async create(
     user: User,
     invoiceInfo: CreateInvoiceDto,
-  ): Promise<CreatedInvoiceDto> {
+  ): Promise<CreatedInvoiceDto | null> {
     const createdInvoice = this.invoiceRepository.create({
       ...invoiceInfo,
       createdBy: user,
     });
 
     await this.invoiceRepository.save(createdInvoice);
+
+    for (const detailItem of invoiceInfo?.detailItems) {
+      await this.detailInvoiceItemService.create({
+        ...detailItem,
+        invoice: createdInvoice,
+      });
+    }
 
     return createdInvoice;
   }
@@ -50,6 +60,13 @@ export class InvoiceService {
 
     const invoices = await this.invoiceRepository.find({
       where: condition,
+      relations: {
+        detailInvoiceItems: {
+          inventory: {
+            product: true,
+          },
+        },
+      },
     });
 
     return invoices;

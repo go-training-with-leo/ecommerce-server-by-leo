@@ -28,5 +28,5 @@ export class DetailInvoiceItem extends BaseEntity {
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'invoice_id' })
-  invoice: DetailInvoiceItem;
+  invoice?: DetailInvoiceItem;
 }

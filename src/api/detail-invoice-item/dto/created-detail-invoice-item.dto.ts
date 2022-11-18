@@ -3,8 +3,9 @@ import { IsString, IsInt, Min, Max, IsUUID } from 'class-validator';
 
 import { GotInvoiceDto } from '@/api/invoice/dto';
 import { GotInventoryDetailDto } from '@/api/inventory/dto';
+import { ActionedBaseDto } from '@/common/dto';
 
-export class CreateDetailInvoiceItemDto {
+export class CreatedDetailInvoiceItemDto extends ActionedBaseDto {
   @IsString()
   @ApiProperty()
   amount: number;

@@ -1,10 +1,8 @@
 import { HttpStatus, RequestMethod } from '@nestjs/common';
 
-import { Role } from '@/common/enums';
 import { IRouteParams } from '@/decorators';
 
 import { CreatedInvoiceDto, GotInvoiceDetailDto, GotInvoiceDto } from './dto';
-import { UpdatedInvoiceDto } from './dto/updated-invoice.dto.';
 
 export default {
   index: 'invoices',
@@ -32,16 +30,8 @@ export default {
   getById: <IRouteParams>{
     path: '/:id',
     method: RequestMethod.GET,
-    roles: [Role.ADMIN],
     swaggerInfo: {
       responses: [{ status: HttpStatus.OK, type: GotInvoiceDetailDto }],
-    },
-  },
-  updateById: <IRouteParams>{
-    path: '/:id',
-    method: RequestMethod.PUT,
-    swaggerInfo: {
-      responses: [{ status: HttpStatus.OK, type: UpdatedInvoiceDto }],
     },
   },
   deleteById: <IRouteParams>{

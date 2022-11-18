@@ -6,9 +6,7 @@ import type { User } from '@/api/user/entities/user.entity';
 
 import {
   GotInvoiceDto,
-  UpdateInvoiceDto,
   CreateInvoiceDto,
-  UpdatedInvoiceDto,
   CreatedInvoiceDto,
   GotInvoiceDetailDto,
 } from './dto';
@@ -31,9 +29,9 @@ export class InvoiceController {
 
   @InjectRoute(invoiceRoutes.getAll)
   public async getAll(@ReqUser() user: User): Promise<GotInvoiceDto[]> {
-    const gotInvoicees = await this.invoiceService.getAll(user);
+    const gotInvoices = await this.invoiceService.getAll(user);
 
-    return gotInvoicees;
+    return gotInvoices;
   }
 
   @InjectRoute(invoiceRoutes.getById)
@@ -44,21 +42,6 @@ export class InvoiceController {
     const gotInvoice = await this.invoiceService.getById({ user, id });
 
     return gotInvoice;
-  }
-
-  @InjectRoute(invoiceRoutes.updateById)
-  public async updateById(
-    @ReqUser() user: User,
-    @Param('id') id: string,
-    @Body() updateInfo: UpdateInvoiceDto,
-  ): Promise<UpdatedInvoiceDto> {
-    const updatedInvoice = await this.invoiceService.updateById({
-      id,
-      user,
-      updateInfo,
-    });
-
-    return updatedInvoice;
   }
 
   @InjectRoute(invoiceRoutes.deleteById)
