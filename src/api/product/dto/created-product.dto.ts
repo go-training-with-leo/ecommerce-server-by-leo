@@ -28,6 +28,6 @@ export class CreatedProductDto extends ActionedBaseDto {
   @ApiProperty({ example: 100, minimum: 1 })
   price: number;
 
-  @ApiProperty({ type: GotCategoryDto })
+  @ApiProperty({ type: () => GotCategoryDto })
   category: GotCategoryDto;
 }

@@ -15,6 +15,7 @@ import { InvoiceModule } from '@/api/invoice/invoice.module';
 import { DiscountModule } from '@/api/discount/discount.module';
 import { CategoryModule } from '@/api/category/category.module';
 import { DetailInvoiceItem } from '@/api/detail-invoice-item/entities';
+import { InventoryModule } from '@/api/inventory/inventory.module';
 
 const EnvSchema = {
   PORT: Joi.number(),
@@ -44,6 +45,7 @@ const EnvSchema = {
     DiscountModule,
     DatabaseModule,
     CategoryModule,
+    InventoryModule,
     DetailInvoiceItem,
   ],
   controllers: [AppController],

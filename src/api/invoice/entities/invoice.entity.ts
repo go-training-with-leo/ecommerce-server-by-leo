@@ -46,13 +46,13 @@ export class Invoice extends BaseEntity {
   @JoinColumn({ name: 'user_id' })
   createdBy: User;
 
-  // @OneToMany(
-  //   () => DetailInvoiceItem,
-  //   (detailItemInvoice) => detailItemInvoice.invoice,
-  //   {
-  //     onDelete: 'CASCADE',
-  //     onUpdate: 'CASCADE',
-  //   },
-  // )
-  // detailInvoiceItems: DetailInvoiceItem[];
+  @OneToMany(
+    () => DetailInvoiceItem,
+    (detailItemInvoice) => detailItemInvoice.invoice,
+    {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  detailInvoiceItems: DetailInvoiceItem[];
 }
