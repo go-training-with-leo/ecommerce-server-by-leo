@@ -54,6 +54,7 @@ export class Invoice1668760259721 implements MigrationInterface {
           {
             name: 'discount_code',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'total',

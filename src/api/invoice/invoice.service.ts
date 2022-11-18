@@ -81,7 +81,14 @@ export class InvoiceService {
   }): Promise<GotInvoiceDetailDto> {
     const invoice = await this.invoiceRepository.findOne({
       where: { id },
-      relations: { createdBy: true },
+      relations: {
+        createdBy: true,
+        detailInvoiceItems: {
+          inventory: {
+            product: true,
+          },
+        },
+      },
     });
 
     if (!invoice) {

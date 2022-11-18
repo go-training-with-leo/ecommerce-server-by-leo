@@ -5,6 +5,7 @@ import {
   IsPostalCode,
   IsPhoneNumber,
   IsUUID,
+  IsOptional,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -64,6 +65,7 @@ export class CreateInvoiceDto {
   phoneNumber: string;
 
   @IsUUID()
+  @IsOptional()
   @ApiProperty({ format: 'uuid' })
   discountCode?: string;
 
