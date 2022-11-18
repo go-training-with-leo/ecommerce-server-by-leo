@@ -29,5 +29,5 @@ export class GotInventoryDto extends ActionedBaseDto {
 
 export class GotInventoryDetailDto extends GotInventoryDto {
   @ApiProperty({ type: () => GotProductDto })
-  product: GotProductDto;
+  product?: GotProductDto;
 }

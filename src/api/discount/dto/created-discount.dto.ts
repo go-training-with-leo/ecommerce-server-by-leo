@@ -15,7 +15,7 @@ export class CreatedDiscountDto {
     minimum: 1,
     maximum: 99,
     example: 20,
-    type: 'number',
+    type: () => 'number',
   })
   percent: number;
 

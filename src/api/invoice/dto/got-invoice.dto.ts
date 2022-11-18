@@ -1,12 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsPostalCode, IsPhoneNumber } from 'class-validator';
+import {
+  IsEmail,
+  IsString,
+  IsPostalCode,
+  IsPhoneNumber,
+  IsUUID,
+} from 'class-validator';
 
 import { ActionedBaseDto } from '@/common/dto';
 
 import { GotUserDto } from '@/api/user/dto';
-import { User } from '@/api/user/entities';
 
-export class GotAddressDto extends ActionedBaseDto {
+export class GotInvoiceDto extends ActionedBaseDto {
+  @IsEmail()
+  @ApiProperty({
+    format: 'email',
+  })
+  email: string;
+
   @IsString()
   @ApiProperty({
     example: 'Lorem',
@@ -46,9 +57,13 @@ export class GotAddressDto extends ActionedBaseDto {
     example: '0123456789',
   })
   phoneNumber: string;
+
+  @IsUUID()
+  @ApiProperty({ format: 'uuid' })
+  discountCode?: string;
 }
 
-export class GotAddressDetailDto extends GotAddressDto {
-  @ApiProperty({ type: () =>  GotUserDto })
+export class GotInvoiceDetailDto extends GotInvoiceDto {
+  @ApiProperty({ type: () => GotUserDto })
   createdBy: GotUserDto;
 }
