@@ -38,15 +38,15 @@ export class Inventory extends BaseEntity {
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
-  @OneToMany(
-    () => DetailInvoiceItem,
-    (detailItemInvoice) => detailItemInvoice.inventory,
-    {
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    },
-  )
-  detailInvoiceItems: DetailInvoiceItem[];
+  // @OneToMany(
+  //   () => DetailInvoiceItem,
+  //   (detailItemInvoice) => detailItemInvoice.inventory,
+  //   {
+  //     onDelete: 'CASCADE',
+  //     onUpdate: 'CASCADE',
+  //   },
+  // )
+  // detailInvoiceItems: DetailInvoiceItem[];
 
   private parseDataBeforeAction(): void {
     if (entity.isValidFieldBeforeParse({ data: Size, value: this.size })) {

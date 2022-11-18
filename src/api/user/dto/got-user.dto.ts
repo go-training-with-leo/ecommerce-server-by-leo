@@ -5,6 +5,7 @@ import { Gender, Role } from '@/common/enums';
 import { ActionedBaseDto } from '@/common/dto';
 import { IsOnlyDate, IsValidGender, IsValidRole } from '@/decorators';
 import { GotAddressDto } from '@/api/address/dto/got-address.dto';
+import { GotInvoiceDto } from '@/api/invoice/dto';
 
 class GotUserSessionDto extends ActionedBaseDto {}
 
@@ -52,4 +53,7 @@ export class GotUserDetailDto extends GotUserDto {
 
   @ApiProperty({ isArray: true })
   sessions: GotUserSessionDto;
+
+  @ApiProperty({ isArray: true })
+  invoices: GotInvoiceDto;
 }

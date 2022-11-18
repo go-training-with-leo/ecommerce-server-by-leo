@@ -16,17 +16,17 @@ export class DetailInvoiceItem extends BaseEntity {
   @Column()
   total: number;
 
-  @ManyToOne(() => Inventory, (inventory) => inventory.detailInvoiceItems, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn({ name: 'inventory_id' })
-  inventory: Inventory;
+  // @ManyToOne(() => Inventory, (inventory) => inventory.detailInvoiceItems, {
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'inventory_id' })
+  // inventory: Inventory;
 
-  @ManyToOne(() => Invoice, (invoice) => invoice.detailInvoiceItems, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn({ name: 'invoice_id' })
-  invoice: DetailInvoiceItem;
+  // @ManyToOne(() => Invoice, (invoice) => invoice.detailInvoiceItems, {
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'invoice_id' })
+  // invoice: DetailInvoiceItem;
 }
