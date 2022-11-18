@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -6,14 +5,16 @@ import {
   ManyToOne,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from 'typeorm';
+import { omit } from 'ramda';
 
 import { Size } from '@/common/enums';
 import { entity, enumh } from '@/utils/helpers';
 import { Product } from '@/api/product/entities';
 import { Base as BaseEntity } from '@/common/entities';
 import inventoryRoutes from '@/api/inventory/inventory.routes';
-import { omit } from 'ramda';
+import { DetailInvoiceItem } from '@/api/detail-invoice-item/entities';
 
 @Entity({ name: inventoryRoutes.index })
 export class Inventory extends BaseEntity {
@@ -36,6 +37,16 @@ export class Inventory extends BaseEntity {
   })
   @JoinColumn({ name: 'product_id' })
   product: Product;
+
+  @OneToMany(
+    () => DetailInvoiceItem,
+    (detailItemInvoice) => detailItemInvoice.inventory,
+    {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  detailInvoiceItems: DetailInvoiceItem[];
 
   private parseDataBeforeAction(): void {
     if (entity.isValidFieldBeforeParse({ data: Size, value: this.size })) {

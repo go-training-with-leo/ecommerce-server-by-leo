@@ -6,6 +6,7 @@ import { Token } from '@/api/token/entities';
 import { Gender, Role } from '@/common/enums';
 import userRoutes from '@/api/user/user.routes';
 import { Address } from '@/api/address/entities';
+import { Invoice } from '@/api/invoice/entities';
 import { entity, enumh, hash } from '@/utils/helpers';
 import { Base as BaseEntity } from '@/common/entities';
 
@@ -49,6 +50,12 @@ export class User extends BaseEntity {
     onUpdate: 'CASCADE',
   })
   addresses: Address[];
+
+  @OneToMany(() => Invoice, (invoice) => invoice.createdBy, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  invoices: Invoice[];
 
   @OneToMany(() => Token, (token) => token.createdBy, {
     onDelete: 'CASCADE',
