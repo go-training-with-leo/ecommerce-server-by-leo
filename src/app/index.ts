@@ -33,9 +33,9 @@ export const initApplication = async (): Promise<INestApplication> => {
 
   loadErrorHandling(app);
 
-  // if (isDevEnv) {
+  if (isDevEnv) {
   genAPIDocument(app);
-  // }
+  }
 
   return app;
 };
